@@ -1,0 +1,1 @@
+rails generate model Event name:string event_type_id:integer
