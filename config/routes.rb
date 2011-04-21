@@ -1,5 +1,6 @@
 RegistrationApp::Application.routes.draw do
   resources :events
+  resources :event_types
   
   #get "events/new"
   match '/newevent', :to => 'events#new'

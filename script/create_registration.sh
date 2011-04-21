@@ -1,0 +1,1 @@
+rails generate model Registration participant_id:integer season_id:integer

@@ -1,7 +1,7 @@
 class EventsController < ApplicationController
   def new
 	@title = "New Event"  	
-  	@event = Event.new
+  	@event = Event.new(:active => true)
   end
 
   def show
@@ -17,8 +17,10 @@ class EventsController < ApplicationController
   end
 
   def create
-    @event = Event.new(params[:event])
-
+  	@event = Event.new(params[:event])
+    #@event_type = EventType.find(params[:event_type_id])     
+    #@event = @event_type.events.create(params[:event]) 
+    
     respond_to do |format|
       if @event.save
         format.html { redirect_to(@event, :notice => 'Event was successfully created.') }

@@ -1,0 +1,1 @@
+rails generate model ShirtSize name:string sort_order:integer
