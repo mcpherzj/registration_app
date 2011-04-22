@@ -12,13 +12,10 @@
   <% end %>
 
 	<%= f.fields_for :participant do |part_form| %>
-	  <p>
 	    <div class="field">
 	      <%= part_form.label :first_name %>
 	      <%= part_form.text_field :first_name %>
 	    </div>
-	  </p>
-	  <p>
 	    <div class="field">
 	      <%= part_form.label :last_name %>
 	      <%= part_form.text_field :last_name %>
@@ -26,11 +23,11 @@
     <% end %>
   
   <div class="field">
-    <%= f.label :uniform_size_id, 'Uniform Size' %><br />
+    <%= f.label :uniform_size_id, 'Uniform Size' %>
   	<%= f.collection_select(:uniform_size_id, UniformSize.all, :id, :name, { :prompt => '-- Select Uni --'}) %> 
   </div>
   <div class="field">
-    <%= f.hidden_field :season_id %><br />
+    <%= f.hidden_field :season_id %>
   </div>
   <div class="actions">
     <%= f.submit %>

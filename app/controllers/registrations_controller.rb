@@ -8,6 +8,8 @@ class RegistrationsController < ApplicationController
   end
 
   def edit
+  	@title = "Registration Edit"
+  	@registration = Registration.find(params[:id])
   end
 
   def update
@@ -35,6 +37,8 @@ class RegistrationsController < ApplicationController
   end
 
   def index
+  	@title = "Registrations Listing"
+  	@registrations = Registration.all
   end
 
   def destroy

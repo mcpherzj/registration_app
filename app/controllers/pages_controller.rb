@@ -11,5 +11,9 @@ class PagesController < ApplicationController
   def about
 	@title = "About"  	
   end
+	
+  def registration_area
+	@title = "Registrations"  	
+  end
 
 end

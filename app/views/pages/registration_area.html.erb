@@ -1,0 +1,12 @@
+<subheader>
+	<nav class="round">
+		<ul>
+			<li><%= link_to "New Registration", newregistration_path %></li>
+			<li><%= link_to "Listing", '#' %></li>
+			<li><%= link_to "Find Registration", '#' %></li>
+		</ul>
+	</nav>
+</subheader>
+<subsection>
+	<%= yield :main_registration %>
+</subsection>

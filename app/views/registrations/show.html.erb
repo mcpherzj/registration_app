@@ -1,16 +1,19 @@
+<%= render 'navigation' %>
+
+<subsection>
+<h1>Registration</h1>
 <p id="notice"><%= notice %></p>
-<p>
-  <b>First Name:</b>
-  <%= @registration.participant.first_name %>
-</p>
-<p>
-<p>
-  <b>Last Name:</b>
-  <%= @registration.participant.last_name %>
-</p>
-<p>
+
+<div class="field">
   <b>Season:</b>
   <%= @registration.season.name %>
-</p>
-
-<%= link_to 'Back', registrations_path %>
+</div>
+<div class="field">
+  <b>First Name:</b>
+  <%= @registration.participant.first_name %>
+</div>
+<div class="field">
+  <b>Last Name:</b>
+  <%= @registration.participant.last_name %>
+</div>
+</subsection>

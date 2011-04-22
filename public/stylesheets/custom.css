@@ -95,6 +95,15 @@ a.signup_button {
   border-radius: 10px;
 }
 
+subheader {
+  padding-top: 20px;
+}
+
+subsection {
+  margin_top: 1em;
+  padding: 20px;
+}
+
 /* Footer */
 
 footer {
@@ -108,4 +117,6 @@ footer {
 footer nav {
   float: none;
 }
+
+
 

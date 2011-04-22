@@ -1,2 +1,29 @@
-<h1>Registrations#index</h1>
-<p>Find me in app/views/registrations/index.html.erb</p>
+<%= render 'navigation' %>
+
+<subsection>
+<h1>Registrations</h1>
+
+<table>
+  <tr>
+    <th>Last Name</th>
+    <th>First Name</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @registrations.each do |reg| %>
+  <tr>
+    <td><%= reg.participant.last_name %></td>
+    <td><%= reg.participant.first_name %></td>
+	<td><%= link_to 'Edit', editregistration_path(:id => reg.id) %></td>
+    <td><%= link_to 'Show', registration_path(reg) %></td>
+    <td><%= link_to 'Destroy', reg, :confirm => 'Are you sure?', :method => :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Event', newregistration_path %>
+</subsection>

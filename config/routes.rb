@@ -12,6 +12,8 @@ RegistrationApp::Application.routes.draw do
   match '/newevent', :to => 'events#new'
 
   match '/newregistration', :to => 'registrations#new'
+  #match '/editregistration/:id', :to => 'registrations#edit'
+  match '/editregistration', :to => 'registrations#edit'
 
   get "registrations/new"
   get "registrations/edit"
@@ -33,6 +35,7 @@ RegistrationApp::Application.routes.draw do
 
   match '/contact', :to => 'pages#contact'
   match '/about', :to => 'pages#about'
+  match '/registration_area', :to => 'pages#registration_area'
   #match '/help', :to => 'pages#help'
   
   #match '/signup', :to => 'users#new'
