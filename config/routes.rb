@@ -1,31 +1,25 @@
 RegistrationApp::Application.routes.draw do
-  get "registration/new"
-
-  get "registration/edit"
-
-  get "registration/update"
-
-  get "registration/create"
-
-  get "registration/show"
-
-  get "registration/index"
-
-  get "registration/destroy"
 
   resources :events
   resources :event_types
   
-  resources :registrations do
-  	resources :participants  	
-  	resources :seasons  	
-  end
+  resources :registrations
+  resources :participants  	
+  resources :seasons  	
   	
   
   #get "events/new"
   match '/newevent', :to => 'events#new'
 
-  match '/registration', :to => 'registrations#new'
+  match '/newregistration', :to => 'registrations#new'
+
+  get "registrations/new"
+  get "registrations/edit"
+  get "registrations/update"
+  get "registrations/show"
+  get "registrations/index"
+  get "registrations/destroy"
+  get "registrations/create"
   
   get "events/show"
   get "events/index"

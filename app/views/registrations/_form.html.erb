@@ -1,0 +1,38 @@
+<%= form_for(@registration) do |f| %>
+  <% if @registration.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@registration.errors.count, "error") %> prohibited this registration from being saved:</h2>
+
+      <ul>
+      <% @registration.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+	<%= f.fields_for :participant do |part_form| %>
+	  <p>
+	    <div class="field">
+	      <%= part_form.label :first_name %>
+	      <%= part_form.text_field :first_name %>
+	    </div>
+	  </p>
+	  <p>
+	    <div class="field">
+	      <%= part_form.label :last_name %>
+	      <%= part_form.text_field :last_name %>
+	    </div>
+    <% end %>
+  
+  <div class="field">
+    <%= f.label :uniform_size_id, 'Uniform Size' %><br />
+  	<%= f.collection_select(:uniform_size_id, UniformSize.all, :id, :name, { :prompt => '-- Select Uni --'}) %> 
+  </div>
+  <div class="field">
+    <%= f.hidden_field :season_id %><br />
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

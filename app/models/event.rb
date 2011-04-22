@@ -1,5 +1,5 @@
 class Event < ActiveRecord::Base
-	attr_accessible(:name, :event_type_id, :active, :gender_id)
+	attr_accessible(:name, :event_type_id, :active, :gender_id, :event_type)
 	belongs_to (:event_type)
 	belongs_to (:gender)
   

@@ -1,0 +1,16 @@
+<p id="notice"><%= notice %></p>
+<p>
+  <b>First Name:</b>
+  <%= @registration.participant.first_name %>
+</p>
+<p>
+<p>
+  <b>Last Name:</b>
+  <%= @registration.participant.last_name %>
+</p>
+<p>
+  <b>Season:</b>
+  <%= @registration.season.name %>
+</p>
+
+<%= link_to 'Back', registrations_path %>
