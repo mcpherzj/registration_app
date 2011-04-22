@@ -20,6 +20,9 @@
   	<%= f.collection_select(:event_type_id, EventType.all, :id, :name, { :prompt => '-- Select Type --'}) %> 
   </div>
   <div class="field">
+    <%= f.label :Gender_id, 'Gender' %><br />
+  	<%= f.collection_select(:gender_id, Gender.all, :id, :name, { :prompt => '-- Select Gender --'}) %> 
+  <div class="field">
     <%= f.label :active %><br />
     <%= f.check_box :active %>
   </div>

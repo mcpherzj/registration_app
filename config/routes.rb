@@ -2,6 +2,12 @@ RegistrationApp::Application.routes.draw do
   resources :events
   resources :event_types
   
+  resources :registrations do
+  	resources :participants  	
+  	resources :seasons  	
+  end
+  	
+  
   #get "events/new"
   match '/newevent', :to => 'events#new'
 

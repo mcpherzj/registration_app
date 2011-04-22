@@ -1,1 +1,1 @@
-rails generate model Registration participant_id:integer season_id:integer
+rails generate model Registration participant:references season_id:integer uniform_size_id:integer shirt_size_id:integer event_discipline_id:integer

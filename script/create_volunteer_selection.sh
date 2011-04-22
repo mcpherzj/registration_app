@@ -1,0 +1,1 @@
+rails generate model VolunteerSelection registration_id:integer volunter_interest_id:integer

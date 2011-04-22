@@ -1,13 +1,18 @@
 class EventsController < ApplicationController
+
   def new
 	@title = "New Event"  	
   	@event = Event.new(:active => true)
   end
 
   def show
+  	@title = "Event Detail"
+  	@event = Event.find(params[:id])
   end
 
   def index
+  	@title = "Listing Events"
+  	@events = Event.all
   end
 
   def edit

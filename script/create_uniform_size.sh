@@ -1,1 +1,1 @@
-rails generate model Uniform Size name:string sort_order:integer
+rails generate model UniformSize name:string sort_order:integer

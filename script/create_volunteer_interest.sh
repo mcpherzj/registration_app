@@ -1,0 +1,1 @@
+rails generate model VolunteerInterest name:string sort_order:integer
