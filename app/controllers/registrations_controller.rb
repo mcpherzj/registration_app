@@ -1,9 +1,10 @@
 class RegistrationsController < ApplicationController
 
   def new
-  	@title = "Registration"
-  	participant = Participant.new(:first_name => 'Jimmy')
-  	@registration = Registration.new(:season_id => Season.find_by_year(2011).id, :participant => participant)
+  	@title = "New Registration"
+  	
+  	@registration = Registration.new
+  	@registration.participant = Participant.new
   	@registration.participant.build;
   end
 
@@ -13,6 +14,19 @@ class RegistrationsController < ApplicationController
   end
 
   def update
+    @registration = Registration.find(params[:id])
+    @registration.participant.attributes=(
+    		params[:registration][:participant_attributes])
+
+    respond_to do |format|
+      if @registration.update_attributes(params[:registration])
+        format.html { redirect_to(@registration, :notice => 'Registration was successfully updated.') }
+        format.xml  { head :ok }
+      else
+        format.html { render :action => "edit" }
+        format.xml  { render :xml => @registration.errors, :status => :unprocessable_entity }
+      end
+    end
   end
 
   def create

@@ -12,6 +12,16 @@ describe "LayoutLinks" do
 		response.should have_selector('title', :content => "Contact")
 	end
 	
+	it "should have a New Registration page at '/newregistration'" do
+		get '/newregistration'
+		response.should have_selector('title', :content => "New Registration")
+	end
+	
+	it "should have a Registration Listing page at '/registrations'" do
+		get '/registrations'
+		response.should have_selector('title', :content => "Registrations Listing")
+	end
+	
 	it "should have an About page at '/about'" do
 		get '/about'
 		response.should have_selector('title', :content => "About")
@@ -35,12 +45,14 @@ describe "LayoutLinks" do
 	it "should have the right links on the layout" do
 		visit root_path
 		response.should have_selector('title', :content => "Home")
-		click_link "About"
-		response.should have_selector('title', :content => "About")
-		click_link "Contact"
-		response.should have_selector('title', :content => "Contact")
+		#click_link "About"
+		#response.should have_selector('title', :content => "About")
+		#click_link "Contact"
+		#response.should have_selector('title', :content => "Contact")
 		click_link "Home"
 		response.should have_selector('title', :content => "Home")
+		click_link "Registration"
+		response.should have_selector('title', :content => "Registrations Listing")
 		#click_link "Sign up now!"
 		#response.should have_selector('title', :content => "Sign up")
 		# test to insure that logo has link and vice versa...

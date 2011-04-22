@@ -10,7 +10,14 @@
       </ul>
     </div>
   <% end %>
+  
+  
+  <div class="field">
+    <%= f.label :season_id, 'Season' %>
+  	<%= f.collection_select(:season_id, Season.all, :id, :name) %> 
+  </div>
 
+	<h2>ATHLETE:</h2>
 	<%= f.fields_for :participant do |part_form| %>
 	    <div class="field">
 	      <%= part_form.label :first_name %>
@@ -20,16 +27,139 @@
 	      <%= part_form.label :last_name %>
 	      <%= part_form.text_field :last_name %>
 	    </div>
-    <% end %>
-  
+	    <div class="field">
+          <%= part_form.label :gender_id, 'Gender' %>
+  	      <%= part_form.collection_select(:gender_id, Gender.all, :id, :name, { :prompt => '-- Select Gender --'}) %> 
+	    </div>
+	    <div class="field">
+	      <%= part_form.label :date_of_birth %>
+	      <%= part_form.date_select :date_of_birth %>
+	    </div>
+	    <div class="field">
+	      <%= part_form.label :street_address %>
+	      <%= part_form.text_field :street_address %>
+	    </div>
+	    <div class="field">
+	      <%= part_form.label :city %>
+	      <%= part_form.text_field :city %>
+	      <%= part_form.label :state %>
+	      <%= part_form.text_field :state %>
+	      <%= part_form.label :zip %>
+	      <%= part_form.text_field :zip, :maxlength => 10 %>
+	    </div>
+	    <div class="field">
+	      <%= part_form.label :school %>
+	      <%= part_form.text_field :school %>
+	      <%= part_form.label :grade %>
+	      <%= part_form.text_field :grade %>
+	    </div>
+	    <div class="field">
+	      <%= part_form.label :home_phone %>
+	      <%= part_form.telephone_field :home_phone, :maxlength => 10, :pattern => "[0-9]" %>
+	    </div>
+	    <div class="field">
+	      <%= part_form.label :cell_phone, "Athlete's Cell Phone" %>
+	      <%= part_form.telephone_field :cell_phone, :maxlength => 10 %>
+	      <%= part_form.label :email %>
+	      <%= part_form.text_field :email %>
+	    </div>
+<br/>
+	<h2>PARENTS:</h2>
+	    <div class="field">
+	      <%= part_form.label :fathers_name %>
+	      <%= part_form.text_field :fathers_name %>
+	    </div>
+	    <div class="field">
+	      <%= part_form.label :fathers_work_phone %>
+	      <%= part_form.telephone_field :fathers_work_phone %>
+	    </div>
+	    <div class="field">
+	      <%= part_form.label :fathers_cell_phone %>
+	      <%= part_form.telephone_field :fathers_cell_phone, :maxlength => 10 %>
+	    </div>
+	    <div class="field">
+	      <%= part_form.label :fathers_email %>
+	      <%= part_form.text_field :fathers_email %>
+	    </div>
+	    <div class="field">
+	      <%= part_form.label :mothers_name %>
+	      <%= part_form.text_field :mothers_name %>
+	    </div>
+	    <div class="field">
+	      <%= part_form.label :mothers_work_phone %>
+	      <%= part_form.telephone_field :mothers_work_phone %>
+	    </div>
+	    <div class="field">
+	      <%= part_form.label :mothers_cell_phone %>
+	      <%= part_form.telephone_field :mothers_cell_phone, :maxlength => 10 %>
+	    </div>
+	    <div class="field">
+	      <%= part_form.label :mothers_email %>
+	      <%= part_form.text_field :mothers_email %>
+	    </div>
+	    <div class="field">
+	      <%= part_form.label :nearest_relative_name %>
+	      <%= part_form.text_field :nearest_relative_name %>
+	    </div>
+	    <div class="field">
+	      <%= part_form.label :nearest_relative_phone %>
+	      <%= part_form.telephone_field :nearest_relative_phone, :maxlength => 10 %>
+	    </div>
+	    <div class="field">
+	    <p><%= part_form.label :special_precautions, 'List any precautions:' %></p>
+	    <p><%= part_form.text_area :special_precautions, :rows => 3, :cols => 10
+ %></p>
+	    </div>
+<br/>
+  <h2>UNIFORMS:</h2>
   <div class="field">
     <%= f.label :uniform_size_id, 'Uniform Size' %>
-  	<%= f.collection_select(:uniform_size_id, UniformSize.all, :id, :name, { :prompt => '-- Select Uni --'}) %> 
+  	<%= f.collection_select(:uniform_size_id, UniformSize.all, :id, :name, { :prompt => '-- Select Size --'}) %> 
   </div>
   <div class="field">
-    <%= f.hidden_field :season_id %>
+    <%= f.label :shirt_size_id, 'Shirt Size' %>
+  	<%= f.collection_select(:shirt_size_id, ShirtSize.all, :id, :name, { :prompt => '-- Select Size --'}) %> 
   </div>
+<br/>
+  <h2>MEDICAL RELEASE INFORMATION:</h2>
+	    <div class="field">
+	      <%= part_form.label :emergency_contact_name %>
+	      <%= part_form.text_field :emergency_contact_name %>
+	    </div>
+	    <div class="field">
+	      <%= part_form.label :emergency_contact_phone %>
+	      <%= part_form.telephone_field :emergency_contact_phone, :maxlength => 10 %>
+	    </div>
+<br/>
+	    <div class="field">
+	    <p><%= part_form.label :medication_in_athletes_possession, "Medication in athlete's Possession:" %></p>
+	    <p><%= part_form.text_area :medication_in_athletes_possession, :rows => 3, :cols => 10
+ %></p>
+	    </div>
+	    <div class="field">
+	    <p><%= part_form.label :pertinent_medical_history, "List any pertinent medical history or chronic medical problems:" %></p>
+	    <p><%= part_form.text_area :pertinent_medical_history, :rows => 3, :cols => 10
+ %></p>
+	    </div>
+<p><b>Medical Insurance:</b></p>
+	    <div class="field">
+	      <%= part_form.label :medical_insurance_company %>
+	      <%= part_form.text_field :medical_insurance_company %>
+	    </div>
+	    <div class="field">
+	      <%= part_form.label :name_of_insured %>
+	      <%= part_form.text_field :name_of_insured %>
+	    </div>
+	    <div class="field">
+	      <%= part_form.label :policy_or_group_number %>
+	      <%= part_form.text_field :policy_or_group_number %>
+	    </div>
+	    <div class="field">
+	      <%= part_form.label :medical_insurance_id_number, "ID Number" %>
+	      <%= part_form.text_field :medical_insurance_id_number %>
+	    </div>
   <div class="actions">
     <%= f.submit %>
   </div>
+    <% end %>
 <% end %>
