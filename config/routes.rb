@@ -1,4 +1,18 @@
 RegistrationApp::Application.routes.draw do
+  get "registration/new"
+
+  get "registration/edit"
+
+  get "registration/update"
+
+  get "registration/create"
+
+  get "registration/show"
+
+  get "registration/index"
+
+  get "registration/destroy"
+
   resources :events
   resources :event_types
   
@@ -11,18 +25,14 @@ RegistrationApp::Application.routes.draw do
   #get "events/new"
   match '/newevent', :to => 'events#new'
 
+  match '/registration', :to => 'registrations#new'
+  
   get "events/show"
-
   get "events/index"
-
   get "events/edit"
-
   get "events/update"
-
   get "events/create"
-
   get "events/destroy"
-
   #get "users/new"
 
   root :to => "pages#home"
