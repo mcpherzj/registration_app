@@ -158,6 +158,15 @@
 	      <%= part_form.label :medical_insurance_id_number, "ID Number" %>
 	      <%= part_form.text_field :medical_insurance_id_number %>
 	    </div>
+
+  <h2>EVENT SELECTION:</h2>
+    <%= f.fields_for :events do |event_fields| %>
+	  <div class="field">
+    	<%= event_fields.check_box :selected %>
+    	<%= event_fields.text_field :name, :readonly => true %>  
+      </div>
+    <% end %>
+	    
   <div class="actions">
     <%= f.submit %>
   </div>

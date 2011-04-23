@@ -1,0 +1,7 @@
+  <h2>EVENT SELECTION:</h2>
+  <%= Event.where(:active => true).each do |event_sel| %>
+    <div class="field">
+      <%= label event_sel :name  %>
+    </div>
+  <% end %>
+

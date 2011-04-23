@@ -11,6 +11,7 @@ class Registration < ActiveRecord::Base
   belongs_to :season
 
   accepts_nested_attributes_for :participant
+  accepts_nested_attributes_for :events
 
   validates(:participant, :presence => true)
 

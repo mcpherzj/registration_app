@@ -1,5 +1,6 @@
 class Event < ActiveRecord::Base
-	attr_accessible(:name, :event_type_id, :active, :gender_id, :event_type)
+	attr_accessor(:selected)
+	attr_accessible(:name, :event_type_id, :active, :gender_id, :event_type, :selected)
 	belongs_to (:event_type)
 	belongs_to (:gender)
   
@@ -12,4 +13,12 @@ class Event < ActiveRecord::Base
 	validates(:event_type_id, 	:presence => true)
 	validates(:active, 	:presence => true)
 	validates(:gender_id, 	:presence => true)
+  
+  def initialize     
+  	@selected = false
+  end
+ 
+  def selected
+  	@selected
+  end  
 end
