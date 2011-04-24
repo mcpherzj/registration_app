@@ -160,8 +160,9 @@
 	    </div>
 
   <h2>EVENT SELECTION:</h2>
-    <%= f.fields_for :events do |event_fields| %>
+    <%= f.fields_for :event_selections do |event_fields| %>
 	  <div class="field">
+    	<%= event_fields.hidden_field :event_id %>
     	<%= event_fields.check_box :selected %>
     	<%= event_fields.text_field :name, :readonly => true %>  
       </div>

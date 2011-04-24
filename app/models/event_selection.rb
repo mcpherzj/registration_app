@@ -12,5 +12,9 @@ class EventSelection < ActiveRecord::Base
   #def selected?
   #	@selected
   #end  
+  
+  def name
+    event.name	
+  end
   	
 end

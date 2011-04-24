@@ -1,6 +1,7 @@
 RegistrationApp::Application.routes.draw do
 
   resources :events
+  resources :event_selections
   resources :event_types
   
   resources :registrations

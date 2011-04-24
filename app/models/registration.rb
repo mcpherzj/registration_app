@@ -12,6 +12,7 @@ class Registration < ActiveRecord::Base
 
   accepts_nested_attributes_for :participant
   accepts_nested_attributes_for :events
+  accepts_nested_attributes_for :event_selections
 
   validates(:participant, :presence => true)
 
