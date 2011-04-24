@@ -1,4 +1,4 @@
-class AddNameGenderUniquenessIndexToEvents < ActiveRecord::Migration
+class AddNameAndGenderUniquenessToEvents < ActiveRecord::Migration
   def self.up
   	add_index :events, [:name, :gender_id], :unique => true
   end

@@ -1,6 +1,6 @@
 class EventSelection < ActiveRecord::Base
-  #attr_accessor(:selected?)
-  attr_accessible(:event_id, :registration_id, :registration, :event)
+  #attr_accessor(:selected)
+  attr_accessible(:event_id, :registration_id, :registration, :event, :selected)
 
   belongs_to :registration  
   belongs_to :event

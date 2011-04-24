@@ -13,12 +13,4 @@ class Event < ActiveRecord::Base
 	validates(:event_type_id, 	:presence => true)
 	validates(:active, 	:presence => true)
 	validates(:gender_id, 	:presence => true)
-  
-  def initialize     
-  	@selected = false
-  end
- 
-  def selected
-  	@selected
-  end  
 end
