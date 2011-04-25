@@ -16,5 +16,13 @@ class EventSelection < ActiveRecord::Base
   def name
     event.name	
   end
+  
+  def gender_id
+    event.gender_id	
+  end
+  
+  def sort_order
+    event.sort_order	
+  end
   	
 end

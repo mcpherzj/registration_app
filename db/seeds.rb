@@ -46,24 +46,24 @@ shirt_sizes.each do |shirt_size|
 end
 
 # Create the volunteer interests
-vols = VolunteerInterest.create([{:name => 'Athlete Recruiting', :sort_order => 10},
-								 {:name => 'Athletic Trainer', :sort_order => 20},
-								 {:name => 'Coaching Assistant', :sort_order => 30},
-								 {:name => 'College Scholarship Committee', :sort_order => 40},
-								 {:name => 'Digital Photographer (video / Camera)', :sort_order => 50},
-								 {:name => 'Fundraising / Donations / Sponsors Committee', :sort_order => 60},
-								 {:name => 'Parent Liaison Committee', :sort_order => 70},
-								 {:name => 'Publicity / Communications', :sort_order => 80},
-								 {:name => 'Registration', :sort_order => 90},
-								 {:name => 'Social Committee', :sort_order => 100},
-								 {:name => 'Spirit Item Sales', :sort_order => 110},
-								 {:name => 'Statistician', :sort_order => 120},
-								 {:name => 'Team Mom or Dad', :sort_order => 130},
-								 {:name => 'Tent Transport / Set up', :sort_order => 140},
-								 {:name => 'Travel Planning', :sort_order => 150},
-								 {:name => 'Uniform Distribution', :sort_order => 160},
-								 {:name => 'Web Page Editor / Administration', :sort_order => 170},
-								 {:name => 'Parent Volunteer Coordinator', :sort_order => 180}])
+vols = VolunteerInterest.create([{:name => 'Athlete Recruiting', :sort_order => 10, :active => true},
+								 {:name => 'Athletic Trainer', :sort_order => 20, :active => true},
+								 {:name => 'Coaching Assistant', :sort_order => 30, :active => true},
+								 {:name => 'College Scholarship Committee', :sort_order => 40, :active => true},
+								 {:name => 'Digital Photographer (video / Camera)', :sort_order => 50, :active => true},
+								 {:name => 'Fundraising / Donations / Sponsors Committee', :sort_order => 60, :active => true},
+								 {:name => 'Parent Liaison Committee', :sort_order => 70, :active => true},
+								 {:name => 'Publicity / Communications', :sort_order => 80, :active => true},
+								 {:name => 'Registration', :sort_order => 90, :active => true},
+								 {:name => 'Social Committee', :sort_order => 100, :active => true},
+								 {:name => 'Spirit Item Sales', :sort_order => 110, :active => true},
+								 {:name => 'Statistician', :sort_order => 120, :active => true},
+								 {:name => 'Team Mom or Dad', :sort_order => 130, :active => true},
+								 {:name => 'Tent Transport / Set up', :sort_order => 140, :active => true},
+								 {:name => 'Travel Planning', :sort_order => 150, :active => true},
+								 {:name => 'Uniform Distribution', :sort_order => 160, :active => true},
+								 {:name => 'Web Page Editor / Administration', :sort_order => 170, :active => true},
+								 {:name => 'Parent Volunteer Coordinator', :sort_order => 180, :active => true}])
 vols.each do |vol|
 	vol.save
 end
@@ -110,12 +110,12 @@ end
 # Create all of the initial event
 # Sprint events first
 event_type = EventType.find_by_name('Sprints')
-events = Event.create([{:name => '100m', :gender_id => male.id, :active => true, :event_type_id => event_type.id},
-					   {:name => '200m', :gender_id => male.id, :active => true, :event_type_id => event_type.id},
-					   {:name => '400m', :gender_id => male.id, :active => true, :event_type_id => event_type.id},
-					   {:name => '100m', :gender_id => female.id, :active => true, :event_type_id => event_type.id},
-					   {:name => '200m', :gender_id => female.id, :active => true, :event_type_id => event_type.id},
-					   {:name => '400m', :gender_id => female.id, :active => true, :event_type_id => event_type.id}])
+events = Event.create([{:name => '100m', :gender_id => male.id, :active => true, :event_type_id => event_type.id, :sort_order => 100},
+					   {:name => '200m', :gender_id => male.id, :active => true, :event_type_id => event_type.id, :sort_order => 110},
+					   {:name => '400m', :gender_id => male.id, :active => true, :event_type_id => event_type.id, :sort_order => 120},
+					   {:name => '100m', :gender_id => female.id, :active => true, :event_type_id => event_type.id, :sort_order => 100},
+					   {:name => '200m', :gender_id => female.id, :active => true, :event_type_id => event_type.id, :sort_order => 110},
+					   {:name => '400m', :gender_id => female.id, :active => true, :event_type_id => event_type.id, :sort_order => 120}])
 
 events.each do |event|
 	event.save
@@ -124,8 +124,8 @@ end
 # Create all of the initial event
 # now Middle Distance events
 event_type = EventType.find_by_name('Middle Distance')
-events = Event.create([{:name => '800m', :gender_id => male.id, :active => true, :event_type_id => event_type.id},
-					   {:name => '800m', :gender_id => female.id, :active => true, :event_type_id => event_type.id}])
+events = Event.create([{:name => '800m', :gender_id => male.id, :active => true, :event_type_id => event_type.id, :sort_order => 200},
+					   {:name => '800m', :gender_id => female.id, :active => true, :event_type_id => event_type.id, :sort_order => 200}])
 
 events.each do |event|
 	event.save
@@ -134,12 +134,12 @@ end
 # Create all of the initial event
 # now Distance events
 event_type = EventType.find_by_name('Distance')
-events = Event.create([{:name => '1500m', :gender_id => male.id, :active => true, :event_type_id => event_type.id},
-					   {:name => '3000m', :gender_id => male.id, :active => true, :event_type_id => event_type.id},
-					   {:name => 'Race walking', :gender_id => male.id, :active => true, :event_type_id => event_type.id},
-					   {:name => '1500m', :gender_id => female.id, :active => true, :event_type_id => event_type.id},
-					   {:name => '3000m', :gender_id => female.id, :active => true, :event_type_id => event_type.id},
-					   {:name => 'Race walking', :gender_id => female.id, :active => true, :event_type_id => event_type.id}])
+events = Event.create([{:name => '1500m', :gender_id => male.id, :active => true, :event_type_id => event_type.id, :sort_order => 300},
+					   {:name => '3000m', :gender_id => male.id, :active => true, :event_type_id => event_type.id, :sort_order => 310},
+					   {:name => 'Race walking', :gender_id => male.id, :active => true, :event_type_id => event_type.id, :sort_order => 320},
+					   {:name => '1500m', :gender_id => female.id, :active => true, :event_type_id => event_type.id, :sort_order => 300},
+					   {:name => '3000m', :gender_id => female.id, :active => true, :event_type_id => event_type.id, :sort_order => 310},
+					   {:name => 'Race walking', :gender_id => female.id, :active => true, :event_type_id => event_type.id, :sort_order => 320}])
 
 events.each do |event|
 	event.save
@@ -148,12 +148,12 @@ end
 # Create all of the initial event
 # now Hurdles events
 event_type = EventType.find_by_name('Hurdles')
-events = Event.create([{:name => '110m h', :gender_id => male.id, :active => true, :event_type_id => event_type.id},
-					   {:name => '200m h', :gender_id => male.id, :active => true, :event_type_id => event_type.id},
-					   {:name => '400m h', :gender_id => male.id, :active => true, :event_type_id => event_type.id},
-					   {:name => '100m h', :gender_id => female.id, :active => true, :event_type_id => event_type.id},
-					   {:name => '200m h', :gender_id => female.id, :active => true, :event_type_id => event_type.id},
-					   {:name => '400m h', :gender_id => female.id, :active => true, :event_type_id => event_type.id}])
+events = Event.create([{:name => '110m h', :gender_id => male.id, :active => true, :event_type_id => event_type.id, :sort_order => 400},
+					   {:name => '200m h', :gender_id => male.id, :active => true, :event_type_id => event_type.id, :sort_order => 410},
+					   {:name => '400m h', :gender_id => male.id, :active => true, :event_type_id => event_type.id, :sort_order => 420},
+					   {:name => '100m h', :gender_id => female.id, :active => true, :event_type_id => event_type.id, :sort_order => 400},
+					   {:name => '200m h', :gender_id => female.id, :active => true, :event_type_id => event_type.id, :sort_order => 410},
+					   {:name => '400m h', :gender_id => female.id, :active => true, :event_type_id => event_type.id, :sort_order => 420}])
 
 events.each do |event|
 	event.save
@@ -162,20 +162,20 @@ end
 # Create all of the initial event
 # now Field Events
 event_type = EventType.find_by_name('Field Events')
-events = Event.create([{:name => 'Long Jump', :gender_id => male.id, :active => true, :event_type_id => event_type.id},
-					   {:name => 'High Jump', :gender_id => male.id, :active => true, :event_type_id => event_type.id},
-					   {:name => 'Triple Jump', :gender_id => male.id, :active => true, :event_type_id => event_type.id},
-					   {:name => 'Pole Vault', :gender_id => male.id, :active => true, :event_type_id => event_type.id},
-					   {:name => 'Shot Put', :gender_id => male.id, :active => true, :event_type_id => event_type.id},
-					   {:name => 'Discus', :gender_id => male.id, :active => true, :event_type_id => event_type.id},
-					   {:name => 'Javelin', :gender_id => male.id, :active => true, :event_type_id => event_type.id},
-					   {:name => 'Long Jump', :gender_id => female.id, :active => true, :event_type_id => event_type.id},
-					   {:name => 'High Jump', :gender_id => female.id, :active => true, :event_type_id => event_type.id},
-					   {:name => 'Triple Jump', :gender_id => female.id, :active => true, :event_type_id => event_type.id},
-					   {:name => 'Pole Vault', :gender_id => female.id, :active => true, :event_type_id => event_type.id},
-					   {:name => 'Shot Put', :gender_id => female.id, :active => true, :event_type_id => event_type.id},
-					   {:name => 'Discus', :gender_id => female.id, :active => true, :event_type_id => event_type.id},
-					   {:name => 'Javelin', :gender_id => female.id, :active => true, :event_type_id => event_type.id}])
+events = Event.create([{:name => 'Long Jump', :gender_id => male.id, :active => true, :event_type_id => event_type.id, :sort_order => 500},
+					   {:name => 'High Jump', :gender_id => male.id, :active => true, :event_type_id => event_type.id, :sort_order => 510},
+					   {:name => 'Triple Jump', :gender_id => male.id, :active => true, :event_type_id => event_type.id, :sort_order => 520},
+					   {:name => 'Pole Vault', :gender_id => male.id, :active => true, :event_type_id => event_type.id, :sort_order => 530},
+					   {:name => 'Shot Put', :gender_id => male.id, :active => true, :event_type_id => event_type.id, :sort_order => 540},
+					   {:name => 'Discus', :gender_id => male.id, :active => true, :event_type_id => event_type.id, :sort_order => 550},
+					   {:name => 'Javelin', :gender_id => male.id, :active => true, :event_type_id => event_type.id, :sort_order => 560},
+					   {:name => 'Long Jump', :gender_id => female.id, :active => true, :event_type_id => event_type.id, :sort_order => 500},
+					   {:name => 'High Jump', :gender_id => female.id, :active => true, :event_type_id => event_type.id, :sort_order => 510},
+					   {:name => 'Triple Jump', :gender_id => female.id, :active => true, :event_type_id => event_type.id, :sort_order => 520},
+					   {:name => 'Pole Vault', :gender_id => female.id, :active => true, :event_type_id => event_type.id, :sort_order => 530},
+					   {:name => 'Shot Put', :gender_id => female.id, :active => true, :event_type_id => event_type.id, :sort_order => 540},
+					   {:name => 'Discus', :gender_id => female.id, :active => true, :event_type_id => event_type.id, :sort_order => 550},
+					   {:name => 'Javelin', :gender_id => female.id, :active => true, :event_type_id => event_type.id, :sort_order => 560}])
 
 events.each do |event|
 	event.save
@@ -184,12 +184,12 @@ end
 # Create all of the initial event
 # now Relays
 event_type = EventType.find_by_name('Relays')
-events = Event.create([{:name => '4 x 100m', :gender_id => male.id, :active => true, :event_type_id => event_type.id},
-					   {:name => '4 x 400m', :gender_id => male.id, :active => true, :event_type_id => event_type.id},
-					   {:name => '4 x 800m', :gender_id => male.id, :active => true, :event_type_id => event_type.id},
-					   {:name => '4 x 100m', :gender_id => female.id, :active => true, :event_type_id => event_type.id},
-					   {:name => '4 x 400m', :gender_id => female.id, :active => true, :event_type_id => event_type.id},
-					   {:name => '4 x 800m', :gender_id => female.id, :active => true, :event_type_id => event_type.id}])
+events = Event.create([{:name => '4 x 100m', :gender_id => male.id, :active => true, :event_type_id => event_type.id, :sort_order => 600},
+					   {:name => '4 x 400m', :gender_id => male.id, :active => true, :event_type_id => event_type.id, :sort_order => 610},
+					   {:name => '4 x 800m', :gender_id => male.id, :active => true, :event_type_id => event_type.id, :sort_order => 620},
+					   {:name => '4 x 100m', :gender_id => female.id, :active => true, :event_type_id => event_type.id, :sort_order => 600},
+					   {:name => '4 x 400m', :gender_id => female.id, :active => true, :event_type_id => event_type.id, :sort_order => 610},
+					   {:name => '4 x 800m', :gender_id => female.id, :active => true, :event_type_id => event_type.id, :sort_order => 620}])
 
 events.each do |event|
 	event.save
@@ -198,12 +198,12 @@ end
 # Create all of the initial event
 # now Multi-Events
 event_type = EventType.find_by_name('Multi-Events')
-events = Event.create([{:name => 'Triathlon (HJ, Shot, 400)', :gender_id => male.id, :active => true, :event_type_id => event_type.id},
-					   {:name => 'Pentathlon (110 h, LJ, Shot, HJ, 1500)', :gender_id => male.id, :active => true, :event_type_id => event_type.id},
-					   {:name => 'Dec (400, 100, 110 h, LJ, Shot, HJ, Jav, PV, Disc, 1500)', :gender_id => male.id, :active => true, :event_type_id => event_type.id},
-					   {:name => 'Triathlon (HJ, Shot, 200)', :gender_id => female.id, :active => true, :event_type_id => event_type.id},
-					   {:name => 'Pentathlon (100 h, LJ, Shot, HJ, 800)', :gender_id => female.id, :active => true, :event_type_id => event_type.id},
-					   {:name => 'Dec (200, 100 h, LJ, Shot, HJ, Jav, 800)', :gender_id => female.id, :active => true, :event_type_id => event_type.id}])
+events = Event.create([{:name => 'Triathlon (HJ, Shot, 400)', :gender_id => male.id, :active => true, :event_type_id => event_type.id, :sort_order => 700},
+					   {:name => 'Pentathlon (110 h, LJ, Shot, HJ, 1500)', :gender_id => male.id, :active => true, :event_type_id => event_type.id, :sort_order => 710},
+					   {:name => 'Dec (400, 100, 110 h, LJ, Shot, HJ, Jav, PV, Disc, 1500)', :gender_id => male.id, :active => true, :event_type_id => event_type.id, :sort_order => 720},
+					   {:name => 'Triathlon (HJ, Shot, 200)', :gender_id => female.id, :active => true, :event_type_id => event_type.id, :sort_order => 700},
+					   {:name => 'Pentathlon (100 h, LJ, Shot, HJ, 800)', :gender_id => female.id, :active => true, :event_type_id => event_type.id, :sort_order => 710},
+					   {:name => 'Heptathlon (200, 100 h, LJ, Shot, HJ, Jav, 800)', :gender_id => female.id, :active => true, :event_type_id => event_type.id, :sort_order => 720}])
 
 events.each do |event|
 	event.save

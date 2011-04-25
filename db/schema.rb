@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110423234643) do
+ActiveRecord::Schema.define(:version => 20110425033027) do
 
   create_table "event_disciplines", :force => true do |t|
     t.string   "name"
@@ -43,6 +43,7 @@ ActiveRecord::Schema.define(:version => 20110423234643) do
     t.datetime "updated_at"
     t.boolean  "active"
     t.integer  "gender_id"
+    t.integer  "sort_order"
   end
 
   add_index "events", ["name", "gender_id"], :name => "index_events_on_name_and_gender_id", :unique => true
@@ -92,6 +93,7 @@ ActiveRecord::Schema.define(:version => 20110423234643) do
     t.integer  "gender_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "parent_legal_guardian"
   end
 
   create_table "registrations", :force => true do |t|
@@ -137,11 +139,12 @@ ActiveRecord::Schema.define(:version => 20110423234643) do
     t.integer  "sort_order"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.boolean  "active"
   end
 
   create_table "volunteer_selections", :force => true do |t|
     t.integer  "registration_id"
-    t.integer  "volunter_interest_id"
+    t.integer  "volunteer_interest_id"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.boolean  "selected"

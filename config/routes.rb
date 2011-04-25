@@ -7,6 +7,9 @@ RegistrationApp::Application.routes.draw do
   resources :registrations
   resources :participants  	
   resources :seasons  	
+
+  resources :volunteer_insterests
+  resources :volunteer_selections
   	
   
   #get "events/new"

@@ -33,7 +33,7 @@
 	    </div>
 	    <div class="field">
 	      <%= part_form.label :date_of_birth %>
-	      <%= part_form.date_select :date_of_birth %>
+	      <%= part_form.date_select :date_of_birth, :start_year => Time.now.year - 21, :end_year => Time.now.year - 4, :order => [:month, :day, :year] %>
 	    </div>
 	    <div class="field">
 	      <%= part_form.label :street_address %>
@@ -62,6 +62,10 @@
 	      <%= part_form.telephone_field :cell_phone, :maxlength => 10 %>
 	      <%= part_form.label :email %>
 	      <%= part_form.text_field :email %>
+	    </div>
+	    <div class="field">
+	      <%= part_form.label :preferred_parent_email %>
+	      <%= part_form.text_field :preferred_parent_email %>
 	    </div>
 <br/>
 	<h2>PARENTS:</h2>
@@ -123,6 +127,10 @@
 <br/>
   <h2>MEDICAL RELEASE INFORMATION:</h2>
 	    <div class="field">
+	      <%= part_form.label :parent_legal_guardian, 'Parent or Legal Guardian' %>
+	      <%= part_form.text_field :parent_legal_guardian %>
+	    </div>
+	    <div class="field">
 	      <%= part_form.label :emergency_contact_name %>
 	      <%= part_form.text_field :emergency_contact_name %>
 	    </div>
@@ -160,14 +168,45 @@
 	    </div>
 
   <h2>EVENT SELECTION:</h2>
+  <div class="field">
+    <%= f.label :event_discipline_id, 'Primary Event' %>
+  	<%= f.collection_select(:event_discipline_id, EventDiscipline.all, :id, :name, { :prompt => '-- Select Event --'}) %> 
+  </div>
+  <% loop = 0 %>
+  <% current_gender = nil %>
+  <% event_type_name = nil %>
     <%= f.fields_for :event_selections do |event_fields| %>
-	  <div class="field">
+	  <% if (current_gender.nil? || current_gender != @registration.event_selections[loop].event.gender)%>
+	    <% current_gender = @registration.event_selections[loop].event.gender %>
+	    <% if (@registration.event_selections[loop].event.gender.is_male?) %>
+	    	<br/><event_gender>BOYS</event_gender>
+	    <% else %>
+	    	<br/><event_gender>GIRLS</event_gender>
+	    <% end %>
+	  <% end %>
+      <div class="field">
     	<%= event_fields.hidden_field :event_id %>
+	  <% if (event_type_name.nil? || event_type_name != @registration.event_selections[loop].event.event_type.name)%>
+	    <% event_type_name = @registration.event_selections[loop].event.event_type.name %>
+	    <br/><event_type><%= @registration.event_selections[loop].event.event_type.name%>:</event_type><br/>
+	  <% end %>
     	<%= event_fields.check_box :selected %>
-    	<%= event_fields.text_field :name, :readonly => true %>  
+    	<%= event_fields.text_field :name, :size => "100", :disabled => "disabled", :style => "border: none" %>  
       </div>
+      <% loop = loop + 1 %>
     <% end %>
 	    
+  <h2>PARENT VOLUNTEER INFORMATION:</h2>
+Please select the area(s) in which you are willing to help out:
+    <%= f.fields_for :volunteer_selections do |volunteer_fields| %>
+      <div class="field">
+    	<%= volunteer_fields.hidden_field :volunteer_interest_id %>
+    	<%= volunteer_fields.check_box :selected %>
+    	<%= volunteer_fields.text_field :name, :size => "100", :disabled => "disabled", :style => "border: none" %>  
+      </div>
+      <% loop = loop + 1 %>
+    <% end %>
+<br/>	    
   <div class="actions">
     <%= f.submit %>
   </div>

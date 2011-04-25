@@ -1,5 +1,5 @@
 class VolunteerInterest < ActiveRecord::Base
-	attr_accessible(:name, :sort_order)
+	attr_accessible(:name, :sort_order, :active)
 
 	has_many :volunteer_selections  
 	has_many :registrations, :through => :volunteer_selections	

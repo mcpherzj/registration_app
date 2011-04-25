@@ -7,11 +7,9 @@ class RegistrationsController < ApplicationController
   	@registration = Registration.new
   	@registration.participant = Participant.new
   	@registration.participant.build;
-    
-    Event.where(:active => true).each do |event|
-       es = EventSelection.new({:event => event, :event_id => event.id, :registration => @registration, :selected => false})
-       @registration.event_selections << es
-    end
+  	
+  	initialize_event_selections
+  	initialize_volunteer_selections 	
   end
 
   def edit
@@ -19,13 +17,18 @@ class RegistrationsController < ApplicationController
   	@registration = Registration.find(params[:id])
   	
   	add_to_event_selections_if_not_included
+  	sort_event_selections
+
+  	add_to_volunteer_selections_if_not_included
+  	sort_volunteer_selections
   end
 
   def update
     @registration = Registration.find(params[:id])
     @registration.participant.attributes=(
     		params[:registration][:participant_attributes])
-    set_event_selections_to_selected(params[:registration][:event_selections_attributes])
+    update_event_selections(params[:registration][:event_selections_attributes])
+    update_volunteer_selections(params[:registration][:volunteer_selections_attributes])
 
     respond_to do |format|
       if @registration.update_attributes(params[:registration])
@@ -42,7 +45,15 @@ class RegistrationsController < ApplicationController
   	@registration = Registration.new(params[:registration])
     @participant = Participant.new(params[:registration][:participant_attributes])
     @registration.participant = @participant
+    if (@participant.date_of_birth.nil?)
+    	puts "dob is null!"
+    end
+    #year = params[:registration][:participant_attributes][:date_of_birth][:1i]
+    #month = params[:registration][:participant_attributes][:date_of_birth][:2i]
+    #day = params[:registration][:participant_attributes][:date_of_birth][:3i]
+    #@registration.participant.date_of_birth = Time.new(:year => year, :month => month, :day => day)
     set_event_selections(params[:registration][:event_selections_attributes])
+    set_volunteer_selections(params[:registration][:volunteer_selections_attributes])
     
     respond_to do |format|
       if @registration.save
@@ -67,18 +78,27 @@ class RegistrationsController < ApplicationController
 
   def destroy
   end
+
+  def initialize_event_selections
+    Event.where(:active => true).each do |event|
+       es = EventSelection.new({:event => event, :event_id => event.id, :registration => @registration, :selected => false})
+       @registration.event_selections << es
+    end
+
+	sort_event_selections
+  end  	
+
+  def initialize_volunteer_selections
+    VolunteerInterest.where(:active => true).each do |vi|
+       vs = VolunteerSelection.new({:volunteer_interest => vi, :volunteer_interest_id => vi.id, :registration => @registration, :selected => false})
+       @registration.volunteer_selections << vs
+    end
+
+	sort_volunteer_selections
+  end  	
   
   def set_event_selections(events_attrs)
 
-#    events_attrs.each_value do |event_symbols|
-#    	id = get_id(event_symbols)
-#    	if (!id.nil?)
-#    	  event = Event.find_by_id(id)
-#          es = EventSelection.new({:event => event, :registration => @registration, :selected => false})
-#          @registration.event_selections << es
-#	    end
-#	end
-    
     Event.where(:active => true).each do |event|
        es = EventSelection.new({:event => event, :event_id => event.id, :registration => @registration, :selected => false})
        @registration.event_selections << es
@@ -87,11 +107,50 @@ class RegistrationsController < ApplicationController
     set_event_selections_to_selected(events_attrs)
 
   end
+  
+  def set_volunteer_selections(vis_attrs)
+
+    VolunteerInterest.where(:active => true).each do |vi|
+       vs = VolunteerSelection.new({:volunteer_interest => vi, :volunteer_interest_id => vi.id, :registration => @registration, :selected => false})
+       @registration.volunteer_selections << vs
+    end
+
+    set_volunteer_selections_to_selected(vis_attrs)
+
+  end
+  
+  def update_event_selections(events_attrs) 
+  	
+    events_attrs.each_value do |event_symbols|
+      id = get_event_id(event_symbols)
+      if (!id.nil?)
+        event_selection = get_event_selection_by_event_id(id)
+        
+        if (!event_selection.nil?)
+    	  event_selection.selected = is_selected?(event_symbols)
+		end
+	  end
+	end
+  end
+  
+  def update_volunteer_selections(vis_attrs) 
+  	
+    vis_attrs.each_value do |vi_symbols|
+      id = get_volunteer_interest_id(vi_symbols)
+      if (!id.nil?)
+        volunteer_selection = get_volunteer_selection_by_volunteer_interest_id(id)
+        
+        if (!volunteer_selection.nil?)
+    	  volunteer_selection.selected = is_selected?(vi_symbols)
+		end
+	  end
+	end
+  end
 
   def set_event_selections_to_selected(events_attrs)
   	
     events_attrs.each_value do |event_symbols|
-      id = get_selected_id(event_symbols)
+      id = get_selected_event_id(event_symbols)
       if (!id.nil?)
         event_selection = get_event_selection_by_event_id(id)
         
@@ -101,28 +160,73 @@ class RegistrationsController < ApplicationController
 	  end
 	end
   end
+
+  def set_volunteer_selections_to_selected(vis_attrs)
+  	
+    vis_attrs.each_value do |vi_symbols|
+      id = get_selected_volunteer_interest_id(vi_symbols)
+      if (!id.nil?)
+        volunteer_selection = get_volunteer_selection_by_volunteer_interest_id(id)
+        
+        if (!volunteer_selection.nil?)
+    		volunteer_selection.selected = true;
+		end
+	  end
+	end
+  end
   
-  def get_id(symbol_container)
+  def get_event_id(symbol_container)
   	
   	idKey = symbol_container["event_id"]
   	    
 	if (!idKey.nil?)
-		return idKey
+		return idKey.to_i
 	end
 	
  	return nil;
   end
   
-  def get_selected_id(symbol_container)
+  def get_volunteer_interest_id(symbol_container)
+  	
+  	idKey = symbol_container["volunteer_interest_id"]
+  	    
+	if (!idKey.nil?)
+		return idKey.to_i
+	end
+	
+ 	return nil;
+  end
+  
+  def is_selected?(symbol_container)
+  	
+  	selectedKey = symbol_container["selected"]
+  	    
+	if (selectedKey.to_i == 1)
+		return true
+	else
+		return false
+	end
+  end
+  
+  def get_selected_event_id(symbol_container)
   	
   	idKey = symbol_container["event_id"]
-  	#puts "id value: " + idKey + " class: " + idKey.class.to_s
   	selectedKey = symbol_container["selected"]
-  	#puts "selected value: " + selectedKey + " class: " + selectedKey.class.to_s
   	    
 	if (!idKey.nil? && selectedKey.to_i == 1)
-		puts "found selected key " + idKey.to_s
-		return idKey
+		return idKey.to_i
+	end
+	
+ 	return nil;
+  end
+  
+  def get_selected_volunteer_interest_id(symbol_container)
+  	
+  	idKey = symbol_container["volunteer_interest_id"]
+  	selectedKey = symbol_container["selected"]
+  	    
+	if (!idKey.nil? && selectedKey.to_i == 1)
+		return idKey.to_i
 	end
 	
  	return nil;
@@ -132,7 +236,18 @@ class RegistrationsController < ApplicationController
     
     Event.where(:active => true).each do |event|
 	  if (!@registration.events.include?(event))
-	    @registration.events << event
+       es = EventSelection.new({:event => event, :event_id => event.id, :registration => @registration, :selected => false})
+       @registration.event_selections << es
+      end
+    end
+  end
+  
+  def add_to_volunteer_selections_if_not_included
+    
+    VolunteerInterest.where(:active => true).each do |vi|
+	  if (!@registration.volunteer_interests.include?(vi))
+       vs = VolunteerSelection.new({:volunteer_interest => vi, :volunteer_interest_id => vi.id, :registration => @registration, :selected => false})
+       @registration.volunteer_selections << vs
       end
     end
   end
@@ -140,11 +255,33 @@ class RegistrationsController < ApplicationController
   def get_event_selection_by_event_id(event_id)
     
     @registration.event_selections.each do |event_selection|
-	  if (event_selection.event_id == event_id.to_i)	  	
+	  if (event_selection.event_id == event_id)	  	
 	    return event_selection
       end
     end
     return nil
   end
+  
+  def get_volunteer_selection_by_volunteer_interest_id(volunteer_interest_id)
+    
+    @registration.volunteer_selections.each do |volunteer_selection|
+	  if (volunteer_selection.volunteer_interest_id == volunteer_interest_id)	  	
+	    return volunteer_selection
+      end
+    end
+    return nil
+  end
+  
+  def sort_event_selections
+    if (!@registration.event_selections.nil?)
+      @registration.event_selections.sort!{ |a,b| [b.gender_id,a.sort_order] <=> [a.gender_id,b.sort_order] }
+    end
+  end  	
+  
+  def sort_volunteer_selections
+    if (!@registration.volunteer_selections.nil?)
+    	@registration.volunteer_selections.sort!{ |a,b| [a.sort_order] <=> [b.sort_order] }
+    end
+  end  	
 
 end

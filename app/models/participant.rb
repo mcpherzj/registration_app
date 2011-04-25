@@ -32,7 +32,8 @@ class Participant < ActiveRecord::Base
 				    :name_of_insured,
 				    :policy_or_group_number,
 				    :medical_insurance_id_number,
-				    :gender_id)
+				    :gender_id,
+				    :parent_legal_guardian)
 
 	has_many :registrations
 	

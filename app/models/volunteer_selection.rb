@@ -3,4 +3,13 @@ class VolunteerSelection < ActiveRecord::Base
 
   belongs_to :registration  
   belongs_to :volunteer_interest
+  
+  def name
+    volunteer_interest.name	
+  end
+  
+  def sort_order
+    volunteer_interest.sort_order	
+  end
+  
 end
