@@ -4,6 +4,7 @@
 <h1>Registration</h1>
 <p id="notice"><%= notice %></p>
 
+<%= link_to 'Edit', editregistration_path(:id => @registration.id) %> <br/>
 <div class="field">
   <b>Season:</b>
   <%= @registration.season.name %>

@@ -12,7 +12,10 @@
   <% end %>
   
   
-  <div class="field">
+   <div class="actions">
+    <%= f.submit %>
+  </div>
+ <div class="field">
     <%= f.label :season_id, 'Season' %>
   	<%= f.collection_select(:season_id, Season.all, :id, :name) %> 
   </div>
@@ -111,10 +114,9 @@
 	    </div>
 	    <div class="field">
 	    <p><%= part_form.label :special_precautions, 'List any precautions:' %></p>
-	    <p><%= part_form.text_area :special_precautions, :rows => 3, :cols => 10
- %></p>
+	    <p><%= part_form.text_area :special_precautions %></p>
 	    </div>
-<br/>
+
   <h2>UNIFORMS:</h2>
   <div class="field">
     <%= f.label :uniform_size_id, 'Uniform Size' %>
@@ -141,13 +143,11 @@
 <br/>
 	    <div class="field">
 	    <p><%= part_form.label :medication_in_athletes_possession, "Medication in athlete's Possession:" %></p>
-	    <p><%= part_form.text_area :medication_in_athletes_possession, :rows => 3, :cols => 10
- %></p>
+	    <p><%= part_form.text_area :medication_in_athletes_possession %></p>
 	    </div>
 	    <div class="field">
 	    <p><%= part_form.label :pertinent_medical_history, "List any pertinent medical history or chronic medical problems:" %></p>
-	    <p><%= part_form.text_area :pertinent_medical_history, :rows => 3, :cols => 10
- %></p>
+	    <p><%= part_form.text_area :pertinent_medical_history %></p>
 	    </div>
 <p><b>Medical Insurance:</b></p>
 	    <div class="field">

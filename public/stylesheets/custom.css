@@ -138,5 +138,11 @@ footer nav {
   float: none;
 }
 
+.field textarea {
+  width: 500px;
+  height: 130px;
+  padding: 0; 
+}
+
 
 
