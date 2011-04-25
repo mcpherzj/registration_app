@@ -27,19 +27,19 @@ class RegistrationsController < ApplicationController
     @registration = Registration.find(params[:id])
     @registration.participant.attributes=(
     		params[:registration][:participant_attributes])
+    
     set_date_of_birth(params[:registration][:participant_attributes])
     update_event_selections(params[:registration][:event_selections_attributes])
     update_volunteer_selections(params[:registration][:volunteer_selections_attributes])
 
-    respond_to do |format|
-      if @registration.update_attributes(params[:registration])
-        format.html { redirect_to(@registration, :notice => 'Registration was successfully updated.') }
-        format.xml  { head :ok }
-      else
-        format.html { render :action => "edit" }
-        format.xml  { render :xml => @registration.errors, :status => :unprocessable_entity }
-      end
-    end
+    if @registration.update_attributes(params[:registration])
+      redirect_to @registration, :notice => 'Registration was successfully updated.'
+    else
+      sort_event_selections
+      sort_volunteer_selections
+      render :action => "edit"
+	end
+	
   end
 
   def create
@@ -51,15 +51,13 @@ class RegistrationsController < ApplicationController
     set_event_selections(params[:registration][:event_selections_attributes])
     set_volunteer_selections(params[:registration][:volunteer_selections_attributes])
     
-    respond_to do |format|
-      if @registration.save
-        format.html { redirect_to(@registration, :notice => 'Registration was successfully created.') }
-        format.xml  { render :xml => @registration, :status => :created, :location => @registration }
-      else
-        format.html { render :action => "new" }
-        format.xml  { render :xml => @registration.errors, :status => :unprocessable_entity }
-      end
-    end
+	if @registration.save
+	  redirect_to @registration, :notice => 'Registration was successfully created.'
+	else
+      sort_event_selections
+      sort_volunteer_selections
+	  render :action => "new"
+	end
   end
 
   def show
@@ -70,6 +68,10 @@ class RegistrationsController < ApplicationController
   def index
   	@title = "Registrations Listing"
   	@registrations = Registration.all
+
+    if (!@registrations.nil?)
+      @registrations.sort!{ |a,b| [a.participant.last_name,a.participant.first_name] <=> [b.participant.last_name,b.participant.first_name] }
+    end
   end
 
   def destroy

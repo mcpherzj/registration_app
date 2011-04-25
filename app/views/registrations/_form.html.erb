@@ -21,11 +21,11 @@
 	<%= f.fields_for :participant do |part_form| %>
 	    <div class="field">
 	      <%= part_form.label :first_name %>
-	      <%= part_form.text_field :first_name %>
+	      <%= part_form.text_field :first_name, :maxlength => "50" %>
 	    </div>
 	    <div class="field">
 	      <%= part_form.label :last_name %>
-	      <%= part_form.text_field :last_name %>
+	      <%= part_form.text_field :last_name, :maxlength => "50" %>
 	    </div>
 	    <div class="field">
           <%= part_form.label :gender_id, 'Gender' %>
@@ -33,7 +33,7 @@
 	    </div>
 	    <div class="field">
 	      <%= part_form.label :date_of_birth %>
-	      <%= part_form.date_select :date_of_birth, :start_year => Time.now.year - 21, :end_year => Time.now.year - 4, :order => [:month, :day, :year] %>
+	      <%= part_form.date_select :date_of_birth, :start_year => Time.now.year - 21, :end_year => Time.now.year - 4, :order => [:month, :day, :year], :prompt => { :day => '-- Select day --', :month => '-- Select month --', :year => '-- Select year --' },  :default => { :day => '-- Select day --', :month => '-- Select month --', :year => '-- Select year --' } %>
 	    </div>
 	    <div class="field">
 	      <%= part_form.label :street_address %>

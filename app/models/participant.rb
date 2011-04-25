@@ -38,14 +38,19 @@ class Participant < ActiveRecord::Base
 
 	has_many :registrations
 	
-  validates(:first_name, :presence => true)
-  validates(:last_name, :presence => true)
+  validates(:first_name, :presence => true,
+  						 :length => { :maximum => 50 })
+  validates(:last_name, :presence => true,
+  						:length => { :maximum => 50 })
   validates(:zip, :length => { :maximum => 10 })
+  validates(:date_of_birth, :presence => true)
   
   validate :date_of_birth_is_valid_date
   
   def date_of_birth_is_valid_date
-  	errors.add(:date_of_birth, 'must be a valid datetime') if ((DateTime.parse(@date_of_birth_string) rescue ArgumentError) == ArgumentError)
+  	if (!@date_of_birth_string.nil?)
+  	  errors.add(:date_of_birth, 'must be a valid datetime') if ((DateTime.parse(@date_of_birth_string) rescue ArgumentError) == ArgumentError)
+  	end
   end 
   
   def validate_and_set_date_of_birth(year, month, day_of_month)

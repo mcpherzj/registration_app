@@ -1,3 +1,4 @@
+<% require 'application_helper' %>
 <%= render 'navigation' %>
 
 <subsection>
@@ -14,8 +15,8 @@
 
 <% @registrations.each do |reg| %>
   <tr>
-    <td><%= reg.participant.last_name %></td>
-    <td><%= reg.participant.first_name %></td>
+    <td><%= reg.participant.last_name.truncate(35) %></td>
+    <td><%= reg.participant.first_name.truncate(35) %></td>
 	<td><%= link_to 'Edit', editregistration_path(:id => reg.id) %></td>
     <td><%= link_to 'Show', registration_path(reg) %></td>
     <td><%= link_to 'Destroy', reg, :confirm => 'Are you sure?', :method => :delete %></td>
