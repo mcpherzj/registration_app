@@ -1,4 +1,5 @@
 RegistrationApp::Application.routes.draw do
+  get "sessions/new"
 
   resources :events
   resources :event_selections
@@ -10,7 +11,11 @@ RegistrationApp::Application.routes.draw do
 
   resources :volunteer_insterests
   resources :volunteer_selections
-  	
+  
+  resources :sessions, :only => [:new, :create, :destroy]
+  
+  match '/signin', :to => 'sessions#new'
+  match '/signout', :to => 'sessions#destroy' 	
   
   #get "events/new"
   match '/newevent', :to => 'events#new'
