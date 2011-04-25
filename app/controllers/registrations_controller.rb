@@ -27,6 +27,7 @@ class RegistrationsController < ApplicationController
     @registration = Registration.find(params[:id])
     @registration.participant.attributes=(
     		params[:registration][:participant_attributes])
+    set_date_of_birth(params[:registration][:participant_attributes])
     update_event_selections(params[:registration][:event_selections_attributes])
     update_volunteer_selections(params[:registration][:volunteer_selections_attributes])
 
@@ -45,13 +46,8 @@ class RegistrationsController < ApplicationController
   	@registration = Registration.new(params[:registration])
     @participant = Participant.new(params[:registration][:participant_attributes])
     @registration.participant = @participant
-    if (@participant.date_of_birth.nil?)
-    	puts "dob is null!"
-    end
-    #year = params[:registration][:participant_attributes][:date_of_birth][:1i]
-    #month = params[:registration][:participant_attributes][:date_of_birth][:2i]
-    #day = params[:registration][:participant_attributes][:date_of_birth][:3i]
-    #@registration.participant.date_of_birth = Time.new(:year => year, :month => month, :day => day)
+
+    set_date_of_birth(params[:registration][:participant_attributes])
     set_event_selections(params[:registration][:event_selections_attributes])
     set_volunteer_selections(params[:registration][:volunteer_selections_attributes])
     
@@ -78,6 +74,14 @@ class RegistrationsController < ApplicationController
 
   def destroy
   end
+  
+  def set_date_of_birth(participant_attrs)
+    year = participant_attrs["date_of_birth(1i)"]
+    month = participant_attrs["date_of_birth(2i)"]
+    day = participant_attrs["date_of_birth(3i)"]
+    
+    @registration.participant.validate_and_set_date_of_birth(year, month, day)
+  end	
 
   def initialize_event_selections
     Event.where(:active => true).each do |event|

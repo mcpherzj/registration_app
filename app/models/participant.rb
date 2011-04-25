@@ -1,4 +1,5 @@
 class Participant < ActiveRecord::Base
+	#attr_accessor(:date_of_birth)
 	attr_accessible(:first_name, 
 					:last_name,
 					:street_address,
@@ -8,7 +9,7 @@ class Participant < ActiveRecord::Base
 					:subdivision,
 					:school,
 					:grade,
-					:date_of_brith,
+					:date_of_birth,
 					:home_phone,
 					:cell_phone,
 				    :email,
@@ -40,5 +41,20 @@ class Participant < ActiveRecord::Base
   validates(:first_name, :presence => true)
   validates(:last_name, :presence => true)
   validates(:zip, :length => { :maximum => 10 })
-	
+  
+  validate :date_of_birth_is_valid_date
+  
+  def date_of_birth_is_valid_date
+  	errors.add(:date_of_birth, 'must be a valid datetime') if ((DateTime.parse(@date_of_birth_string) rescue ArgumentError) == ArgumentError)
+  end 
+  
+  def validate_and_set_date_of_birth(year, month, day_of_month)
+  	@date_of_birth_string = year + "-" + month + "-" + day_of_month
+  	if ((Date.parse(@date_of_birth_string) rescue ArgumentError) == ArgumentError)
+  	  # do nothing if date argument is invalid
+  	else
+  	  self[:date_of_birth] = Date.parse(@date_of_birth_string)
+  	  puts "********** dob: " + @date_of_birth_string
+  	end
+  end 	
 end
