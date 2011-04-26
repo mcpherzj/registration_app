@@ -14,6 +14,7 @@ class SessionsController < ApplicationController
       render :action => "new"
     else
       # Sign the user in and redirect to the registration page.
+      flash[:notice] = "Login Successful"
       sign_in user
       redirect_to registrations_path
     end    

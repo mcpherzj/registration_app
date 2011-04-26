@@ -75,6 +75,14 @@ class RegistrationsController < ApplicationController
   end
 
   def destroy
+  	@registration = Registration.find(params[:id])
+  	
+  	if Registration.delete(@registration.id)
+	  redirect_to registrations_path, :notice => 'Registration was successfully deleted.'
+	else
+	  flash[:error] = 'Registration was NOT successfully deleted!'
+	  redirect_to registrations_path
+	end  	
   end
   
   def set_date_of_birth(participant_attrs)

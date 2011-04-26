@@ -23,6 +23,7 @@ RegistrationApp::Application.routes.draw do
   match '/newregistration', :to => 'registrations#new'
   #match '/editregistration/:id', :to => 'registrations#edit'
   match '/editregistration', :to => 'registrations#edit'
+  match '/deleteregistration', :to => 'registrations#destroy'
 
   get "registrations/new"
   get "registrations/edit"
