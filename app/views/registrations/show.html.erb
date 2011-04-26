@@ -2,7 +2,9 @@
 
 <subsection>
 <h1>Registration</h1>
+<% if !notice.nil? %>
 <p id="notice"><%= notice %></p>
+<% end %>
 
 <%= link_to 'Edit', editregistration_path(:id => @registration.id) %> <br/>
 <div class="field">
