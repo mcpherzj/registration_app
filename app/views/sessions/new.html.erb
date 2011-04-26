@@ -2,6 +2,7 @@
 
 <%= form_for(:session, :url => sessions_path) do |f| %>
     <%= content_tag(:p, flash[:error], :id => "error") if flash[:error] %>
+    <%= content_tag(:p, flash[:notice], :id => "notice") if flash[:notice] %>
   <div class="field">
     <%= f.label :email %><br />
     <%= f.text_field :email %>

@@ -1,4 +1,5 @@
 class EventsController < ApplicationController
+  before_filter :authenticate, :only => [:new, :edit, :update, :create, :show, :index, :destroy]
 
   def new
 	@title = "New Event"  	
@@ -38,6 +39,17 @@ class EventsController < ApplicationController
   end
 
   def destroy
+  end
+
+private
+
+  def authenticate
+    deny_access unless signed_in?
+  end
+
+  def correct_user
+    #@user = User.find(params[:id])
+    #redirect_to(root_path) unless current_user?(@user)
   end
 
 end

@@ -1,6 +1,11 @@
 
 class RegistrationsController < ApplicationController
-
+  before_filter :authenticate, :only => [:new, :edit, :update, :create, :show, :index, :destroy]
+  
+  # once we allow users to look at and update their own registration data 
+  # - we need to include the code below
+  #before_filter :correct_user, :only => [:edit, :update]
+  
   def new
   	@title = "New Registration"
   	
@@ -86,6 +91,17 @@ class RegistrationsController < ApplicationController
 	  flash[:error] = 'Registration was NOT successfully deleted!'
 	  redirect_to registrations_path
 	end  	
+  end
+
+private
+
+  def authenticate
+    deny_access unless signed_in?
+  end
+
+  def correct_user
+    #@user = User.find(params[:id])
+    #redirect_to(root_path) unless current_user?(@user)
   end
   
   def set_date_of_birth(participant_attrs)
