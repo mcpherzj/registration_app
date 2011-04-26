@@ -45,6 +45,34 @@ class Participant < ActiveRecord::Base
   validates(:zip, :length => { :maximum => 10 })
   validates(:date_of_birth, :presence => true)
   
+  validates(:street_address, :length => { :maximum => 75 })
+  validates(:city, :length => { :maximum => 50 })
+  validates(:state, :length => { :maximum => 2 })
+  validates(:subdivision, :length => { :maximum => 50 })
+  validates(:school, :length => { :maximum => 50 })
+  validates(:grade, :length => { :maximum => 2 })
+  validates(:home_phone, :length => { :maximum => 25 })
+  validates(:cell_phone, :length => { :maximum => 25 })
+  validates(:fathers_work_phone, :length => { :maximum => 25 })
+  validates(:fathers_cell_phone, :length => { :maximum => 25 })
+  validates(:mothers_work_phone, :length => { :maximum => 25 })
+  validates(:mothers_cell_phone, :length => { :maximum => 25 })
+  validates(:nearest_relative_phone, :length => { :maximum => 25 })
+  validates(:emergency_contact_phone, :length => { :maximum => 25 })
+  validates(:email, :length => { :maximum => 50 })
+  validates(:preferred_parent_email, :length => { :maximum => 50 })
+  validates(:fathers_email, :length => { :maximum => 50 })
+  validates(:mothers_email, :length => { :maximum => 50 })
+  validates(:fathers_name, :length => { :maximum => 60 })
+  validates(:mothers_name, :length => { :maximum => 60 })
+  validates(:nearest_relative_name, :length => { :maximum => 60 })
+  validates(:emergency_contact_name, :length => { :maximum => 60 })
+  validates(:medical_insurance_company, :length => { :maximum => 60 })
+  validates(:name_of_insured, :length => { :maximum => 60 })
+  validates(:parent_legal_guardian, :length => { :maximum => 60 })
+  validates(:policy_or_group_number, :length => { :maximum => 25 })
+  validates(:medical_insurance_id_number, :length => { :maximum => 25 })
+  
   validate :date_of_birth_is_valid_date
   
   def date_of_birth_is_valid_date
@@ -59,7 +87,6 @@ class Participant < ActiveRecord::Base
   	  # do nothing if date argument is invalid
   	else
   	  self[:date_of_birth] = Date.parse(@date_of_birth_string)
-  	  puts "********** dob: " + @date_of_birth_string
   	end
   end 	
 end
