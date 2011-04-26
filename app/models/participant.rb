@@ -36,7 +36,10 @@ class Participant < ActiveRecord::Base
 				    :gender_id,
 				    :parent_legal_guardian)
 
-	has_many :registrations
+  has_many :registrations
+  belongs_to  :gender
+	
+  email_regex = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
 	
   validates(:first_name, :presence => true,
   						 :length => { :maximum => 50 })
@@ -59,10 +62,22 @@ class Participant < ActiveRecord::Base
   validates(:mothers_cell_phone, :length => { :maximum => 25 })
   validates(:nearest_relative_phone, :length => { :maximum => 25 })
   validates(:emergency_contact_phone, :length => { :maximum => 25 })
-  validates(:email, :length => { :maximum => 50 })
-  validates(:preferred_parent_email, :length => { :maximum => 50 })
-  validates(:fathers_email, :length => { :maximum => 50 })
-  validates(:mothers_email, :length => { :maximum => 50 })
+  validates(:email, :length => { :maximum => 50 },
+                    :format => { :allow_nil => true,
+                                 :allow_blank => true,
+                                 :with => email_regex })
+  validates(:preferred_parent_email, :length => { :maximum => 50 },
+                                     :format => { :allow_nil => true,
+                                                  :allow_blank => true,
+                                                  :with => email_regex })
+  validates(:fathers_email, :length => { :maximum => 50 },
+                            :format => { :allow_nil => true,
+                                         :allow_blank => true,
+                                         :with => email_regex })
+  validates(:mothers_email, :length => { :maximum => 50 },
+                            :format => { :allow_nil => true,
+                                         :allow_blank => true,
+                                         :with => email_regex })
   validates(:fathers_name, :length => { :maximum => 60 })
   validates(:mothers_name, :length => { :maximum => 60 })
   validates(:nearest_relative_name, :length => { :maximum => 60 })

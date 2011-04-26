@@ -9,6 +9,9 @@ class Registration < ActiveRecord::Base
   
   belongs_to :participant
   belongs_to :season
+  belongs_to :uniform_size
+  belongs_to :shirt_size
+  belongs_to :event_discipline
 
   accepts_nested_attributes_for :participant
   accepts_nested_attributes_for :events
@@ -16,5 +19,6 @@ class Registration < ActiveRecord::Base
   accepts_nested_attributes_for :volunteer_selections
 
   validates(:participant, :presence => true)
+  validates(:season, :presence => true)
 
 end

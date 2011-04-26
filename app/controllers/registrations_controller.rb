@@ -63,6 +63,9 @@ class RegistrationsController < ApplicationController
   def show
   	@title = "Registration Detail"
   	@registration = Registration.find(params[:id])
+  	
+    sort_event_selections
+    sort_volunteer_selections
   end
 
   def index
