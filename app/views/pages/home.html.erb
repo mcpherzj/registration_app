@@ -1,2 +1,12 @@
-<h1>Pages#home</h1>
-<p>Find me in app/views/pages/home.html.erb</p>
+<h1>Northwest Flyers Registration App</h1>
+<p>
+Welcome to the Northwest Flyers Online Registration.
+</p>
+
+<% if signed_in? %>
+<p>Click the button below to create a new registration.</p>
+<%= link_to "New Registration", newregistration_path, :class => "signup_button round" %>
+<% else %>
+<p>Click the button below to enter the registration site.</p>
+<%= link_to "Sign In", signin_path, :class => "signup_button round" %>
+<% end %>

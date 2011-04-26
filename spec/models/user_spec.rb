@@ -1,8 +1,10 @@
 require 'spec_helper'
 
 describe User do
+	
   describe "password encryption" do
-    before(:each) do
+    
+  	before(:each) do
       @user = User.create!(@attr)
     end
     

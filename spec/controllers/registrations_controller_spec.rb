@@ -1,6 +1,7 @@
 require 'spec_helper'
 
 describe RegistrationsController do
+  render_views
 
   describe "GET 'new'" do
     it "should be successful" do
@@ -10,22 +11,43 @@ describe RegistrationsController do
   end
 
   describe "GET 'edit'" do
+
+    before(:each) do
+      @user = Factory(:user)
+      test_sign_in(@user)
+      @registration = Factory(:registration)
+    end  	
+   
     it "should be successful" do
-      get 'edit'
+      get :edit, :id => @registration
       response.should be_success
     end
   end
 
   describe "GET 'update'" do
+
+    before(:each) do
+      @user = Factory(:user)
+      test_sign_in(@user)
+      @registration = Factory(:registration)
+    end  	
+   
     it "should be successful" do
-      get 'update'
+      get :update, :id => @registration
       response.should be_success
     end
   end
 
   describe "GET 'show'" do
+
+    before(:each) do
+      @user = Factory(:user)
+      test_sign_in(@user)
+      @registration = Factory(:registration)
+    end  	
+
     it "should be successful" do
-      get 'show'
+      get :show, :id => @registration
       response.should be_success
     end
   end
@@ -45,8 +67,15 @@ describe RegistrationsController do
   end
 
   describe "GET 'create'" do
+
+    before(:each) do
+      @user = Factory(:user)
+      test_sign_in(@user)
+      @registration = Factory(:registration)
+    end  	
+   
     it "should be successful" do
-      get 'create'
+      get :create, :id => @registration
       response.should be_success
     end
   end
