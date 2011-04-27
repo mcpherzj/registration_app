@@ -39,6 +39,7 @@ module RegistrationApp
     # Configure sensitive parameters which will be filtered from the log file.
     config.filter_parameters += [:password]
     
-    #config.force_ssl = true
+    # SSL enforcement
+    config.middleware.use Rack::SslEnforcer, :except => /^\/deploys/
   end
 end
