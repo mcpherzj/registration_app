@@ -46,4 +46,9 @@ RegistrationApp::Application.configure do
 
   # Send deprecation notices to registered listeners
   config.active_support.deprecation = :notify
+  
+  # SSL configuration
+  #even simpler use rack-ssl-enforcer rack middle ware to do the same thing  
+  require 'rack-ssl-enforcer'  
+  use Rack::SslEnforcer
 end
