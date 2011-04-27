@@ -49,6 +49,6 @@ RegistrationApp::Application.configure do
   
   # SSL configuration
   #even simpler use rack-ssl-enforcer rack middle ware to do the same thing  
-  require 'rack-ssl-enforcer'  
-  use Rack::SslEnforcer
+  #require 'rack-ssl-enforcer'  
+  #use Rack::SslEnforcer
 end
