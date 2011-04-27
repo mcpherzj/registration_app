@@ -17,7 +17,7 @@ class SessionsController < ApplicationController
       flash[:notice] = "Login Successful"
       sign_in user
       #redirect_to registrations_path
-      redirect_back_or user
+      redirect_back_or registrations_path
     end    
   end
   

@@ -25,7 +25,9 @@
 	    </div>
 	    <div class="field">
           <%= part_form.label :gender_id, 'Gender' %>
-  	      <%= @registration.participant.gender.name %> 
+          <% if !@registration.participant.gender.nil? %>
+  	        <%= @registration.participant.gender.name %>
+  	      <% end %>
 	    </div>
 	    <div class="field">
 	      <%= part_form.label :date_of_birth %>
@@ -115,18 +117,18 @@
 	    </div>
 
   <h2>UNIFORMS:</h2>
-  <% if !@registration.uniform_size_id.nil? %>
   <div class="field">
     <%= f.label :uniform_size_id, 'Uniform Size' %>
-  	<%= @registration.uniform_size.name %> 
+    <% if !@registration.uniform_size_id.nil? %>
+  	  <%= @registration.uniform_size.name %> 
+    <% end %>
   </div>
-  <% end %>
-  <% if !@registration.shirt_size_id.nil? %>
   <div class="field">
     <%= f.label :shirt_size_id, 'Shirt Size' %>
-  	<%= @registration.shirt_size.name %> 
+    <% if !@registration.shirt_size_id.nil? %>
+    	<%= @registration.shirt_size.name %> 
+    <% end %>
   </div>
-  <% end %>
 <br/>
   <h2>MEDICAL RELEASE INFORMATION:</h2>
 	    <div class="field">
