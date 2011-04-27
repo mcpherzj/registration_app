@@ -14,7 +14,7 @@ class SessionsController < ApplicationController
       render :action => "new"
     else
       # Sign the user in and redirect to the home page.
-      flash[:notice] = "Login Successful"
+      flash[:notice] = "You have signed in successfully"
       sign_in user
       #redirect_to registrations_path
       redirect_back_or root_path
@@ -22,6 +22,7 @@ class SessionsController < ApplicationController
   end
   
   def destroy
+    flash[:notice] = "You are now signed out."
     sign_out
     redirect_to root_path
   end
