@@ -51,4 +51,6 @@ RegistrationApp::Application.configure do
   #even simpler use rack-ssl-enforcer rack middle ware to do the same thing  
   #require 'rack-ssl-enforcer'  
   #use Rack::SslEnforcer
+  config.middleware.use Rack::SslEnforcer, :except => /^\/deploys/
+
 end
