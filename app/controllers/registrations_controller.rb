@@ -71,6 +71,12 @@ class RegistrationsController < ApplicationController
   	
     sort_event_selections
     sort_volunteer_selections
+
+    # added for possible service
+  	respond_to do |format|
+  	  format.html
+  	  format.xml { render :xml => @registration }	
+  	end
   end
 
   def index

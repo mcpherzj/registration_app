@@ -21,7 +21,7 @@ end
 # Create the uniform sizes
 uniform_sizes = UniformSize.create([{:name => 'YS (chest 26-28)', :sort_order => 10},
 									{:name => 'YM (chest 28-29', :sort_order => 20},
-									{:name => 'YL (chest 30-31', :sort_order => 30},
+									{:name => 'YL (chest 30-31)', :sort_order => 30},
 									{:name => 'Adult Small', :sort_order => 40},
 									{:name => 'Adult Med', :sort_order => 50},
 									{:name => 'Adult Large', :sort_order => 60},

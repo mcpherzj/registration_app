@@ -15,7 +15,9 @@
    <div class="actions">
     <%= f.submit %>
   </div>
- <div class="field">
+  <br/>
+  <p>Required fields are mark with an asterisk(*)</p>
+  <div class="field">
     <%= f.label :season_id, 'Season' %>
   	<%= f.collection_select(:season_id, Season.all, :id, :name) %> 
   </div>
@@ -23,19 +25,19 @@
 	<h2>ATHLETE:</h2>
 	<%= f.fields_for :participant do |part_form| %>
 	    <div class="field">
-	      <%= part_form.label :first_name %>
+	      <%= part_form.label :first_name, 'First name*' %>
 	      <%= part_form.text_field :first_name, :maxlength => "50" %>
 	    </div>
 	    <div class="field">
-	      <%= part_form.label :last_name %>
+	      <%= part_form.label :last_name, 'Last name*' %>
 	      <%= part_form.text_field :last_name, :maxlength => "50" %>
 	    </div>
 	    <div class="field">
-          <%= part_form.label :gender_id, 'Gender' %>
+          <%= part_form.label :gender_id, 'Gender*' %>
   	      <%= part_form.collection_select(:gender_id, Gender.all, :id, :name, { :prompt => '-- Select Gender --'}) %> 
 	    </div>
 	    <div class="field">
-	      <%= part_form.label :date_of_birth %>
+	      <%= part_form.label :date_of_birth, 'Date of birth*' %>
 	      <%= part_form.date_select :date_of_birth, :start_year => Time.now.year - 21, :end_year => Time.now.year - 4, :order => [:month, :day, :year], :prompt => { :day => '-- Select day --', :month => '-- Select month --', :year => '-- Select year --' },  :default => { :day => '-- Select day --', :month => '-- Select month --', :year => '-- Select year --' } %>
 	    </div>
 	    <div class="field">
@@ -61,7 +63,7 @@
 	      <%= part_form.collection_select :grade, Grade.all, :name, :name, { :include_blank => true } %>
 	    </div>
 	    <div class="field">
-	      <%= part_form.label :home_phone %>
+	      <%= part_form.label :home_phone, 'Home phone*' %>
 	      <%= part_form.telephone_field :home_phone, :maxlength => "25" %>
 	    </div>
 	    <div class="field">
@@ -123,8 +125,12 @@
 
   <h2>UNIFORMS:</h2>
   <div class="field">
+    <%= f.label :child_uniform_size_id, 'Child Uniform Size' %>
+  	<%= f.collection_select(:child_uniform_size_id, UniformSize.child_uniform_sizes, :id, :name, { :prompt => '-- Select Size --'}) %> For Sub-Bantums and Bantums only
+  </div>
+  <div class="field">
     <%= f.label :uniform_size_id, 'Uniform Size' %>
-  	<%= f.collection_select(:uniform_size_id, UniformSize.all, :id, :name, { :prompt => '-- Select Size --'}) %> 
+  	<%= f.collection_select(:uniform_size_id, UniformSize.adult_uniform_sizes, :id, :name, { :prompt => '-- Select Size --'}) %> For Midgets and Up only
   </div>
   <div class="field">
     <%= f.label :shirt_size_id, 'Shirt Size' %>
@@ -137,16 +143,16 @@
 	      <%= part_form.text_field :parent_legal_guardian, :maxlength => "60" %>
 	    </div>
 	    <div class="field">
-	      <%= part_form.label :emergency_contact_name %>
+	      <%= part_form.label :emergency_contact_name, 'Alternate Emergency Contact Name' %>
 	      <%= part_form.text_field :emergency_contact_name, :maxlength => "60" %>
 	    </div>
 	    <div class="field">
-	      <%= part_form.label :emergency_contact_phone %>
+	      <%= part_form.label :emergency_contact_phone, 'Alternate Emergency Contact Phone' %>
 	      <%= part_form.telephone_field :emergency_contact_phone, :maxlength => "25" %>
 	    </div>
 <br/>
 	    <div class="field">
-	    <p><%= part_form.label :medication_in_athletes_possession, "Medication in athlete's Possession:" %></p>
+	    <p><%= part_form.label :medication_in_athletes_possession, "Medication in Athlete's Possession:" %></p>
 	    <p><%= part_form.text_area :medication_in_athletes_possession %></p>
 	    </div>
 	    <div class="field">
@@ -210,6 +216,13 @@ Please select the area(s) in which you are willing to help out:
       </div>
       <% loop = loop + 1 %>
     <% end %>
+  <h2>Fundraising:</h2>
+Please identify whether you plan to purchase the fundraising buyout:
+  <div class="field">
+    <%= f.label :fundraising_buy_out, 'Buy Out' %>
+  	<%= f.collection_select(:fundraising_buy_out, FundraisingBuyOut.all, :id, :name, { :prompt => '-- Select Option --'}) %>
+  </div>
+    
 <br/>	    
   <div class="actions">
     <%= f.submit %>

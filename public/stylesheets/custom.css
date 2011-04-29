@@ -175,6 +175,10 @@ footer nav {
   list-style: square;
 }
 
+#registration_table {
+  font-size: 12px;
+}
+
 #notice { background-color: #A4E7A0; border: 1px solid #26722D; }  
 
 #error { background-color: #F0A8A8; border: 1px solid #900; }  
@@ -190,5 +194,6 @@ footer nav {
 #error a { border: 1px solid #900; color: #900; }  
 
 #notice a:hover, #error a:hover { color: #333; border: 1px solid #333; } 
+
 
 

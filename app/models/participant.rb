@@ -47,6 +47,7 @@ class Participant < ActiveRecord::Base
   						:length => { :maximum => 50 })
   validates(:zip, :length => { :maximum => 10 })
   validates(:date_of_birth, :presence => true)
+  validates(:gender_id, :presence => true)
   
   validates(:street_address, :length => { :maximum => 75 })
   validates(:city, :length => { :maximum => 50 })
@@ -54,7 +55,8 @@ class Participant < ActiveRecord::Base
   validates(:subdivision, :length => { :maximum => 50 })
   validates(:school, :length => { :maximum => 50 })
   validates(:grade, :length => { :maximum => 2 })
-  validates(:home_phone, :length => { :maximum => 25 })
+  validates(:home_phone, :presence => true,
+                         :length => { :maximum => 25 })
   validates(:cell_phone, :length => { :maximum => 25 })
   validates(:fathers_work_phone, :length => { :maximum => 25 })
   validates(:fathers_cell_phone, :length => { :maximum => 25 })

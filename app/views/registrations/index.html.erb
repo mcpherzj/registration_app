@@ -7,10 +7,12 @@
 <p id="notice"><%= notice %></p>
 <% end %>
 
-<table>
+<table id="registration_table">
   <tr>
     <th>Last Name</th>
     <th>First Name</th>
+    <th>Created</th>
+    <th>Updated</th>
     <th></th>
     <th></th>
     <th></th>
@@ -18,8 +20,10 @@
 
 <% @registrations.each do |reg| %>
   <tr>
-    <td><%= reg.participant.last_name.truncate(35) %></td>
-    <td><%= reg.participant.first_name.truncate(35) %></td>
+    <td><%= reg.participant.last_name.truncate(30) %></td>
+    <td><%= reg.participant.first_name.truncate(30) %></td>
+    <td><%= reg.created_at.getlocal.strftime '%m-%d-%Y %I:%M %p' %></td>
+    <td><%= reg.maximum_updated_at.getlocal.strftime '%m-%d-%Y %I:%M %p' %></td>
 	<td><%= link_to 'Edit', editregistration_path(:id => reg.id) %></td>
     <td><%= link_to 'Show', registration_path(reg) %></td>
     <td><%= link_to 'Delete', deleteregistration_path(:id => reg), :confirm => 'Are you sure you want to delete this registration?' %></td>
@@ -29,5 +33,5 @@
 
 <br />
 
-<%= link_to 'New Regitration', newregistration_path %>
+<%= link_to 'New Registration', newregistration_path %>
 </subsection>

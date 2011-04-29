@@ -9,6 +9,12 @@ class EventsController < ApplicationController
   def show
   	@title = "Event Detail"
   	@event = Event.find(params[:id])
+  	
+    # added for possible service
+  	respond_to do |format|
+  	  format.html
+  	  format.xml { render :xml => @event }	
+  	end
   end
 
   def index

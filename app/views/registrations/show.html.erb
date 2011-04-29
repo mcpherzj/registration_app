@@ -6,7 +6,8 @@
 <p id="notice"><%= notice %></p>
 <% end %>
 
-<%= link_to 'Edit', editregistration_path(:id => @registration.id) %> <br/>
+<%= link_to 'Edit', editregistration_path(:id => @registration.id) %>
+<br/>
 <%= form_for(@registration) do |f| %>
   <div class="field">
     <%= f.label :season_id, 'Season' %>
@@ -56,7 +57,7 @@
 	      <%= @registration.participant.grade %>
 	    </div>
 	    <div class="field">
-	      <%= part_form.label :home_phone %>
+	      <%= part_form.label :home_phone, 'Home phone*' %>
 	      <%= part_form.telephone_field :home_phone, :maxlength => "25", :disabled => "disabled", :style => "border: none" %>
 	    </div>
 	    <div class="field">
@@ -66,7 +67,7 @@
 	      <%= part_form.text_field :email, :maxlength => "50", :disabled => "disabled", :style => "border: none" %>
 	    </div>
 	    <div class="field">
-	      <%= part_form.label :preferred_parent_email %>
+	      <%= part_form.label :preferred_parent_email, 'Preferred parent email*' %>
 	      <%= part_form.text_field :preferred_parent_email, :maxlength => "50", :disabled => "disabled", :style => "border: none" %>
 	    </div>
 <br/>
@@ -118,13 +119,19 @@
 
   <h2>UNIFORMS:</h2>
   <div class="field">
+    <%= f.label :child_uniform_size_id, 'Child Uniform Size' %>
+    <% if !@registration.child_uniform_size_id.nil? %>
+  	  <%= UniformSize.find_by_id(@registration.child_uniform_size_id).name %> 
+    <% end %>
+  </div>
+  <div class="field">
     <%= f.label :uniform_size_id, 'Uniform Size' %>
     <% if !@registration.uniform_size_id.nil? %>
   	  <%= @registration.uniform_size.name %> 
     <% end %>
   </div>
   <div class="field">
-    <%= f.label :shirt_size_id, 'Shirt Size' %>
+    <%= f.label :shirt_size_id, 'T-Shirt Size' %>
     <% if !@registration.shirt_size_id.nil? %>
     	<%= @registration.shirt_size.name %> 
     <% end %>
@@ -136,11 +143,11 @@
 	      <%= part_form.text_field :parent_legal_guardian, :maxlength => "60", :disabled => "disabled", :style => "border: none" %>
 	    </div>
 	    <div class="field">
-	      <%= part_form.label :emergency_contact_name %>
+	      <%= part_form.label :emergency_contact_name, 'Alternate emergency contact name' %>
 	      <%= part_form.text_field :emergency_contact_name, :maxlength => "60", :disabled => "disabled", :style => "border: none" %>
 	    </div>
 	    <div class="field">
-	      <%= part_form.label :emergency_contact_phone %>
+	      <%= part_form.label :emergency_contact_phone, 'Alternate emergency contact phone' %>
 	      <%= part_form.telephone_field :emergency_contact_phone, :maxlength => "25", :disabled => "disabled", :style => "border: none" %>
 	    </div>
 <br/>
@@ -171,12 +178,12 @@
 	    </div>
 
   <h2>EVENT SELECTION:</h2>
-  <% if !@registration.event_discipline_id.nil? %>
   <div class="field">
     <%= f.label :event_discipline_id, 'Primary Event' %>
-  	<%= @registration.event_discipline.name %> 
+    <% if !@registration.event_discipline_id.nil? %>
+  	  <%= @registration.event_discipline.name %> 
+    <% end %>
   </div>
-  <% end %>
   <% loop = 0 %>
   <% current_gender = nil %>
   <% event_type_name = nil %>
@@ -211,7 +218,20 @@ Please select the area(s) in which you are willing to help out:
       </div>
       <% loop = loop + 1 %>
     <% end %>
+  <h2>Fundraising:</h2>
+Please identify whether you plan to purchase the fundraising buyout:
+  <div class="field">
+    <%= f.label :fundraising_buy_out, 'Buy Out' %>
+    <% if (!@registration.fundraising_buy_out.nil?)%>
+      <% if (@registration.fundraising_buy_out == true)%>
+      	Yes
+      <% else %>
+        No
+      <% end %>
+    <% end %>
+  </div>
   <% end %>
 <% end %>
+
 <br/><%= link_to 'Edit', editregistration_path(:id => @registration.id) %>
 </subsection>

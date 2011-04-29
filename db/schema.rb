@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110425221320) do
+ActiveRecord::Schema.define(:version => 20110429191514) do
 
   create_table "event_disciplines", :force => true do |t|
     t.string   "name"
@@ -104,6 +104,8 @@ ActiveRecord::Schema.define(:version => 20110425221320) do
     t.integer  "event_discipline_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.boolean  "fundraising_buy_out"
+    t.integer  "child_uniform_size_id"
   end
 
   create_table "season_types", :force => true do |t|

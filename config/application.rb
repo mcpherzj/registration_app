@@ -40,6 +40,6 @@ module RegistrationApp
     config.filter_parameters += [:password]
     
     # SSL enforcement
-    config.middleware.use Rack::SslEnforcer, :except => /^\/deploys/
+    #config.middleware.use Rack::SslEnforcer, :except => /^\/deploys/
   end
 end
