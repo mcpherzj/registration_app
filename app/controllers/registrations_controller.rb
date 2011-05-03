@@ -1,10 +1,104 @@
 
+
 class RegistrationsController < ApplicationController
+
+
   before_filter :authenticate, :only => [:new, :edit, :update, :create, :show, :index, :destroy]
-  
+ 
   # once we allow users to look at and update their own registration data 
   # - we need to include the code below
   #before_filter :correct_user, :only => [:edit, :update]
+  
+  def export
+  	require 'stringio'
+  	
+  	@excel_book = generate_spreadsheet
+  	data = StringIO.new ''
+  	@excel_book.write data
+  	#require 'spreadsheet'
+  	#headers['Content-Type'] = "application/vnd.ms-excel"    
+  	#headers['Content-Disposition'] = 'attachment; filename="report.xls"'    
+  	#headers['Cache-Control'] = ''    
+  	
+  	#@participants = Participant.all  
+  	
+  	#render :layout => 'non_application'  
+  	#render :layout => false  
+  	
+    # Create workbook.
+    t = Time.now
+    file = "registration_data_" + t.strftime("%Y%m%d%H%M%S") + ".xls"  
+
+    puts file
+
+    #workbook = Excel.new("/reports/#{file}")  
+	send_data(data.string, {
+      :disposition => 'attachment',
+      :encoding => 'utf8',
+      :stream => false,
+      :type => 'application/excel',
+      :filename => "#{file}"})
+
+    #redirect_to :action => 'index'  
+  	
+  end
+  
+  def generate_spreadsheet
+      
+    workbook = Spreadsheet::Workbook.new
+    #("/reports/#{file}")  
+  
+    heading = Spreadsheet::Format.new(  
+       :color     => "green",  
+       :bold      => true,  
+       :underline => true  
+    )  
+  
+    data = Spreadsheet::Format.new(  
+       :color     => "black",  
+       :bold      => false,  
+       :underline => false  
+    )  
+  
+    workbook.add_format(heading)  
+    workbook.add_format(data)  
+    
+    worksheet = workbook.create_worksheet :name => "Registrations"
+  
+    #start_column, start_row = 2, 3  
+    #worksheet = workbook.add_worksheet(worksheet)  
+    #opportunities = get_opportunities_that_are(status)  
+    participants = Participant.all
+    
+    column_order = ["last_name", "first_name"]
+    
+    #Cycle through the participants  
+    rownum = 0
+    for column in column_order
+      worksheet.row(rownum).push column
+      worksheet.row(rownum).default_format = heading
+    end
+    for participant in participants
+      rownum += 1
+      for column in column_order
+        worksheet.row(rownum).push participant[column].nil? ? 'N/A' : participant[column]
+        worksheet.row(rownum).default_format = data
+      end
+    end
+    
+    loop = 0
+    for col_name in column_order
+    	col = worksheet.column(loop)
+    	col.width = 40
+    	loop += 1
+	end
+  
+    #workbook.close  
+    #workbook.write "#{file}"
+    #Spreadsheet.open "#{file}"
+    puts "inside generate_spreadsheet"
+    return workbook
+  end  	
   
   def new
   	@title = "New Registration"

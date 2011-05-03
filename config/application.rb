@@ -41,5 +41,7 @@ module RegistrationApp
     
     # SSL enforcement
     #config.middleware.use Rack::SslEnforcer, :except => /^\/deploys/
+    
+    Spreadsheet.client_encoding = 'UTF-8'
   end
 end

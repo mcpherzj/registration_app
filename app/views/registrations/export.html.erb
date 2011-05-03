@@ -1,0 +1,14 @@
+<% content_for :stylesheets do %>  
+	header {display: none}
+<% end %>
+
+<table border="1">
+  <tr>
+    <th>First Name</th>
+  </tr>
+  <% @participants.each do |p| %>
+  <tr>
+   <td><%= p.first_name %></td>
+  <% end %>
+ </tr>
+</table>
