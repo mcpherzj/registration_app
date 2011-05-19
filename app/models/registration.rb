@@ -6,7 +6,8 @@ class Registration < ActiveRecord::Base
                   :event_discipline_id, 
                   :maximum_updated_at,
                   :fundraising_buy_out,
-                  :child_uniform_size_id)
+                  :child_uniform_size_id,
+                  :in_track_central)
   
   has_many :event_selections  
   has_many :events, :through => :event_selections
