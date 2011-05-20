@@ -21,6 +21,10 @@
     <%= f.label :season_id, 'Season' %>
   	<%= f.collection_select(:season_id, Season.all, :id, :name) %> 
   </div>
+  <div class="field">
+    <%= f.label :in_track_central, 'In Track Central' %>
+  	<%= f.collection_select(:in_track_central, InTrackCentral.all, :id, :name) %>
+  </div>
 
 	<h2>ATHLETE:</h2>
 	<%= f.fields_for :participant do |part_form| %>

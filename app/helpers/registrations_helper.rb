@@ -102,6 +102,8 @@ module RegistrationsHelper
     worksheet.row(rownum).default_format = heading
     worksheet.row(rownum).push "fundraising_buy_out"
     worksheet.row(rownum).default_format = heading
+    worksheet.row(rownum).push "in_track_central"
+    worksheet.row(rownum).default_format = heading
     
     events = Event.all.sort{ |a,b| [b.gender_id,a.sort_order] <=> [a.gender_id,b.sort_order] }
       
@@ -148,6 +150,8 @@ module RegistrationsHelper
       worksheet.row(rownum).push reg.event_discipline_id.nil? ? nil : reg.event_discipline.name
       worksheet.row(rownum).default_format = data
       worksheet.row(rownum).push reg.fundraising_buy_out.nil? ? nil : reg.fundraising_buy_out ? "Yes" : "No"
+      worksheet.row(rownum).default_format = data
+      worksheet.row(rownum).push reg.in_track_central.nil? ? nil : reg.in_track_central ? "Yes" : "No"
       worksheet.row(rownum).default_format = data
 
       reg.event_selections.sort!{ |a,b| [b.gender_id,a.sort_order] <=> [a.gender_id,b.sort_order] }
