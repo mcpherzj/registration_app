@@ -13,6 +13,16 @@
     <%= f.label :season_id, 'Season' %>
   	<%= @registration.season.name %> 
   </div>
+  <div class="field">
+    <%= f.label :in_track_central, 'In Track Central' %>
+    <% if (!@registration.in_track_central.nil?)%>
+      <% if (@registration.in_track_central == true)%>
+      	Yes
+      <% else %>
+        No
+      <% end %>
+    <% end %>
+  </div>
 
 	<h2>ATHLETE:</h2>
 	<%= f.fields_for :participant do |part_form| %>
