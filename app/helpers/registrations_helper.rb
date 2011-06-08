@@ -180,4 +180,75 @@ module RegistrationsHelper
     return workbook
   end  	
 
+  def generate_spreadsheet_of_emails
+      
+    workbook = Spreadsheet::Workbook.new
+  
+    heading = Spreadsheet::Format.new(   
+       :color => "black",  
+       :bold => true,
+       :underline => false,
+       :pattern => 1,
+       :pattern_fg_color => "yellow",
+       :border => [true, true, true, true] 
+    )  
+  
+    data = Spreadsheet::Format.new(  
+       :color     => "black",  
+       :bold      => false,
+       :underline => false,
+       :border => [true, true, true, true] 
+    )  
+  
+    workbook.add_format(heading)  
+    workbook.add_format(data)  
+    
+    worksheet = workbook.create_worksheet :name => "Emails"
+    
+    rownum = 0
+    #worksheet.row(rownum).push "email"
+    #worksheet.row(rownum).default_format = heading
+    
+    seasonTypes = SeasonType.where(:name => "Track & Field")
+
+    if (seasonTypes == 0)
+      return workbook
+    end
+
+    seasons = Season.where(:season_type_id => seasonTypes[0].id, :active => true)
+
+    if (seasons.count == 0)
+      return workbook
+    end
+
+    regs = Registration.where(:season_id => seasons[0].id)
+    if (regs.count == 0)
+      return workbook
+    end
+
+    emails = Array.new
+
+    for reg in regs
+      if (!reg.participant.preferred_parent_email.nil? and reg.participant.preferred_parent_email != "" and !emails.include?(reg.participant.preferred_parent_email))
+        emails << reg.participant.preferred_parent_email
+      end
+    end  
+
+    if (emails.count > 0)
+         
+      #Cycle through the emails 
+      for email in emails
+
+        email_str = email + ";"
+        worksheet.row(rownum).push email_str
+        #worksheet.row(rownum).default_format = data
+
+        rownum += 1
+      end
+    
+    end
+  
+    return workbook
+  end  	
+
 end

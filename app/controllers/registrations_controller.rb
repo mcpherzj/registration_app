@@ -42,6 +42,26 @@ class RegistrationsController < ApplicationController
     #redirect_to :action => 'index'  
   	
   end
+  
+  def export_emails
+  	require 'stringio'
+  	
+  	@excel_book = generate_spreadsheet_of_emails
+  	data = StringIO.new ''
+  	@excel_book.write data
+  	
+    # Create workbook.
+    t = Time.now
+    file = "registration_emails_" + t.strftime("%Y%m%d%H%M%S") + ".xls"  
+
+	send_data(data.string, {
+      :disposition => 'attachment',
+      :encoding => 'utf8',
+      :stream => false,
+      :type => 'application/excel',
+      :filename => "#{file}"})
+  	
+  end
     
   def new
   	@title = "New Registration"
@@ -113,6 +133,7 @@ class RegistrationsController < ApplicationController
   	respond_to do |format|
   	  format.html
   	  format.xml { render :xml => @registration }	
+  	  format.json { render :json => @registration.to_json }	
   	end
   end
 
