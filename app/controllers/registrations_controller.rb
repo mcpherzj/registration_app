@@ -54,7 +54,47 @@ class RegistrationsController < ApplicationController
     t = Time.now
     file = "registration_emails_" + t.strftime("%Y%m%d%H%M%S") + ".xls"  
 
-	send_data(data.string, {
+	  send_data(data.string, {
+      :disposition => 'attachment',
+      :encoding => 'utf8',
+      :stream => false,
+      :type => 'application/excel',
+      :filename => "#{file}"})
+  	
+  end
+  
+  def export_parent_emails
+  	require 'stringio'
+  	
+  	@excel_book = generate_spreadsheet_of_parent_emails
+  	data = StringIO.new ''
+  	@excel_book.write data
+  	
+    # Create workbook.
+    t = Time.now
+    file = "registration_emails_" + t.strftime("%Y%m%d%H%M%S") + ".xls"  
+
+	  send_data(data.string, {
+      :disposition => 'attachment',
+      :encoding => 'utf8',
+      :stream => false,
+      :type => 'application/excel',
+      :filename => "#{file}"})
+  	
+  end
+  
+  def export_athlete_emails
+  	require 'stringio'
+  	
+  	@excel_book = generate_spreadsheet_of_athlete_emails
+  	data = StringIO.new ''
+  	@excel_book.write data
+  	
+    # Create workbook.
+    t = Time.now
+    file = "registration_emails_" + t.strftime("%Y%m%d%H%M%S") + ".xls"  
+
+	  send_data(data.string, {
       :disposition => 'attachment',
       :encoding => 'utf8',
       :stream => false,

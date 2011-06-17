@@ -26,6 +26,8 @@ RegistrationApp::Application.routes.draw do
   match '/deleteregistration', :to => 'registrations#destroy'
   match '/excelexport', :to => 'registrations#export'
   match '/excelemails', :to => 'registrations#export_emails'
+  match '/excelparentemails', :to => 'registrations#export_parent_emails'
+  match '/excelathleteemails', :to => 'registrations#export_athlete_emails'
 
   get "registrations/new"
   get "registrations/edit"

@@ -251,4 +251,110 @@ module RegistrationsHelper
     return workbook
   end  	
 
+
+  def generate_spreadsheet_of_parent_emails
+      
+    workbook = Spreadsheet::Workbook.new
+    
+    worksheet = workbook.create_worksheet :name => "Emails"
+    
+    rownum = 0
+    
+    seasonTypes = SeasonType.where(:name => "Track & Field")
+
+    if (seasonTypes == 0)
+      return workbook
+    end
+
+    seasons = Season.where(:season_type_id => seasonTypes[0].id, :active => true)
+
+    if (seasons.count == 0)
+      return workbook
+    end
+
+    regs = Registration.where(:season_id => seasons[0].id)
+    if (regs.count == 0)
+      return workbook
+    end
+
+    emails = Array.new
+
+    for reg in regs
+      # try the father's email
+      if (!reg.participant.fathers_email.nil? and reg.participant.fathers_email != "" and !emails.include?(reg.participant.fathers_email))
+        emails << reg.participant.fathers_email
+      end
+
+      # try the mother's email
+      if (!reg.participant.mothers_email.nil? and reg.participant.mothers_email != "" and !emails.include?(reg.participant.mothers_email))
+        emails << reg.participant.mothers_email
+      end
+    end  
+
+    if (emails.count > 0)
+         
+      #Cycle through the emails 
+      for email in emails
+
+        email_str = email + ";"
+        worksheet.row(rownum).push email_str
+
+        rownum += 1
+      end
+    
+    end
+  
+    return workbook
+  end
+
+  def generate_spreadsheet_of_athlete_emails
+      
+    workbook = Spreadsheet::Workbook.new
+    
+    worksheet = workbook.create_worksheet :name => "Emails"
+    
+    rownum = 0
+    
+    seasonTypes = SeasonType.where(:name => "Track & Field")
+
+    if (seasonTypes == 0)
+      return workbook
+    end
+
+    seasons = Season.where(:season_type_id => seasonTypes[0].id, :active => true)
+
+    if (seasons.count == 0)
+      return workbook
+    end
+
+    regs = Registration.where(:season_id => seasons[0].id)
+    if (regs.count == 0)
+      return workbook
+    end
+
+    emails = Array.new
+
+    for reg in regs
+      # try the father's email
+      if (!reg.participant.email.nil? and reg.participant.email != "" and !emails.include?(reg.participant.email))
+        emails << reg.participant.email
+      end
+    end  
+
+    if (emails.count > 0)
+         
+      #Cycle through the emails 
+      for email in emails
+
+        email_str = email + ";"
+        worksheet.row(rownum).push email_str
+
+        rownum += 1
+      end
+    
+    end
+  
+    return workbook
+  end
+  
 end
