@@ -19,7 +19,11 @@
   <p>Required fields are mark with an asterisk(*)</p>
   <div class="field">
     <%= f.label :season_id, 'Season' %>
-  	<%= f.collection_select(:season_id, Season.all, :id, :name) %> 
+	<% if (@registration.id.nil?) %>
+  	<%= f.collection_select(:season_id, Season.where(:active => true), :id, :name) %>
+	<% else %>
+  	<%= f.collection_select(:season_id, Season.all, :id, :name) %>
+	<% end %>
   </div>
   <div class="field">
     <%= f.label :in_track_central, 'In Track Central' %>

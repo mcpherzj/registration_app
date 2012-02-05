@@ -1,0 +1,61 @@
+<%= render 'navigation' %>
+
+<subsection>
+<h1>Find Registrations</h1>
+<% if !notice.nil? %>
+<p id="notice"><%= notice %></p>
+<% end %>
+
+<% form_tag @search, :method => 'get' do %>
+    <p>
+	<div class="field">
+	  <%= label_tag 'first_name', 'First Name:', :class => "label-search" %>
+      <%= text_field_tag :first_name, params[:first_name], :class => "textfield-search" %>
+	</div>
+	<div class="field">
+	  <%= label_tag 'last_name', 'Last Name:', :class => "label-search"%>
+      <%= text_field_tag :last_name, params[:last_name], :class => "textfield-search" %>
+	</div>
+	<div class="field">
+	  <%= label_tag 'email', 'E-mail:', :class => "label-search" %>
+      <%= text_field_tag :email, params[:email], :maxlength => "50", :class => "textfield-search" %>
+	</div>
+	<div class="actions">
+    	<%= submit_tag "Search", :name => nil, :class => "search-button" %>
+	</div>
+    </p>
+  <% end %>
+
+<% if (@registrations.count > 0) %>
+<table id="registration_table">
+  <tr>
+    <th>Last Name</th>
+    <th>First Name</th>
+    <th>Season</th>
+    <th>Created</th>
+    <th>Updated</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+<% end %>
+
+<% @registrations.each do |reg| %>
+  <tr>
+    <td><%= reg.participant.last_name.truncate(30) %></td>
+    <td><%= reg.participant.first_name.truncate(30) %></td>
+    <td><%= reg.season.name %></td>
+    <td><%= reg.created_at.getlocal.strftime '%m-%d-%Y %I:%M %p' %></td>
+    <td><%= reg.maximum_updated_at.getlocal.strftime '%m-%d-%Y %I:%M %p' %></td>
+	<td><%= link_to 'Edit', editregistration_path(:id => reg.id) %></td>
+    <td><%= link_to 'Show', registration_path(reg) %></td>
+    <td><%= link_to 'Delete', deleteregistration_path(:id => reg), :confirm => 'Are you sure you want to delete this registration?' %></td>
+	<td><%= link_to 'Copy', newregistration_path(:id => reg.id) %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Registration', newregistration_path %>
+</subsection>

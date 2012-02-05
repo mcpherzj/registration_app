@@ -106,12 +106,19 @@ class RegistrationsController < ApplicationController
   def new
   	@title = "New Registration"
   	
-  	@registration = Registration.new
-  	@registration.participant = Participant.new
-  	@registration.participant.build;
+  	if (!params[:id].nil?)
+  	  @registration = copy_registration(params[:id])
+	  end
+	  
+	  if (@registration.nil?)
   	
-  	initialize_event_selections
-  	initialize_volunteer_selections 	
+  	  @registration = Registration.new
+  	  @registration.participant = Participant.new
+  	  @registration.participant.build;
+  	
+  	  initialize_event_selections
+  	  initialize_volunteer_selections
+	  end
   end
 
   def edit
@@ -179,7 +186,21 @@ class RegistrationsController < ApplicationController
 
   def index
   	@title = "Registrations Listing"
+  	#@registrations = Registration.search(params[:search])
   	@registrations = Registration.all
+
+    if (!@registrations.nil?)
+      @registrations.sort!{ |a,b| [a.participant.last_name,a.participant.first_name] <=> [b.participant.last_name,b.participant.first_name] }
+    end
+  end
+
+  def find
+  	@title = "Find Registrations"
+  	#@criteria = Criteria.new
+  	#@criteria.first_name = 
+  	#puts params[:search]
+
+  	@registrations = Registration.search(params[:first_name], params[:last_name])
 
     if (!@registrations.nil?)
       @registrations.sort!{ |a,b| [a.participant.last_name,a.participant.first_name] <=> [b.participant.last_name,b.participant.first_name] }

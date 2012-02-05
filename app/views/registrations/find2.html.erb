@@ -1,0 +1,18 @@
+<%= form_for(@criteria) do |f| %>  
+  
+   <div class="actions">
+    <%= f.submit %>
+  </div>
+  <br/>
+
+   <div class="field">
+     <%= f.label :first_name, 'First name*' %>
+     <%= f.text_field :first_name, :maxlength => "50" %>
+   </div>
+    
+<br/>	    
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+
+<% end %>

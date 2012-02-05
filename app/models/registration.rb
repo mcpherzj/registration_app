@@ -44,5 +44,20 @@ class Registration < ActiveRecord::Base
   	
   	
   end
+  
+  def self.search(first_name, last_name)
+    return [] if first_name.blank? and last_name.blank? 
+    
+    join_string = "INNER JOIN participants ON participants.id = registrations.participant_id"
+    
+    if !first_name.blank?
+      join_string = join_string + " AND participants.first_name like '%" + first_name + "%'"
+    end
+    
+    if !last_name.blank?
+      join_string = join_string + " AND participants.last_name like '%" + last_name + "%'"
+    end
+    return Registration.all(:joins => join_string)
+  end
 
 end

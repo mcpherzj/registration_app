@@ -179,6 +179,12 @@ footer nav {
   font-size: 12px;
 }
 
+.label-search {
+	float: left;
+	width: 90px;
+	margin-right: 10px;
+}
+
 #notice { background-color: #A4E7A0; border: 1px solid #26722D; }  
 
 #error { background-color: #F0A8A8; border: 1px solid #900; }  
