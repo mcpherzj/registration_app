@@ -380,6 +380,8 @@ module RegistrationsHelper
       new_es = EventSelection.new({:event => es.event, :event_id => es.event_id, :registration => reg_copy, :selected => es.selected})
       reg_copy.event_selections << new_es
     end
+    
+    sort_registration_event_selections(reg_copy)
   end
   
   def copy_volunteer_selections(registration, reg_copy)
@@ -388,35 +390,20 @@ module RegistrationsHelper
        new_vs = VolunteerSelection.new({:volunteer_interest => vs.volunteer_interest, :volunteer_interest_id => vs.volunteer_interest_id, :registration => reg_copy, :selected => vs.selected})
        reg_copy.volunteer_selections << new_vs
     end
-  end
-
-  def complete_event_selections (registration)
     
-    Event.where(:active => true).each do |event|
-	    if (!registration.events.include?(event))
-        es = EventSelection.new({:event => event, :event_id => event.id, :registration => registration, :selected => false})
-        registration.event_selections << es
-      end
-    end
-
+    sort_registration_volunteer_selections(reg_copy)
+  end
+  
+  def sort_registration_event_selections (registration)
     if (!registration.event_selections.nil?)
       registration.event_selections.sort!{ |a,b| [b.gender_id,a.sort_order] <=> [a.gender_id,b.sort_order] }
     end
   end  	
 
-  def complete_volunteer_selections (registration)
-    
-    VolunteerInterest.where(:active => true).each do |vi|
-	  if (!registration.volunteer_interests.include?(vi))
-       vs = VolunteerSelection.new({:volunteer_interest => vi, :volunteer_interest_id => vi.id, :registration => registration, :selected => false})
-       registration.volunteer_selections << vs
-      end
-    end
-
+  def sort_registration_volunteer_selections (registration)
     if (!registration.volunteer_selections.nil?)
     	registration.volunteer_selections.sort!{ |a,b| [a.sort_order] <=> [b.sort_order] }
     end
   end  	
-  
 
 end

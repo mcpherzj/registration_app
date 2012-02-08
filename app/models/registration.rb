@@ -41,14 +41,17 @@ class Registration < ActiveRecord::Base
   
   def fundraising_buy_out_options
   	options = Array.new
-  	
-  	
+  	  	
   end
   
-  def self.search(first_name, last_name)
-    return [] if first_name.blank? and last_name.blank? 
+  def self.search(first_name, last_name, season_id)
+    return [] if first_name.blank? and last_name.blank? and season_id.blank? 
     
     join_string = "INNER JOIN participants ON participants.id = registrations.participant_id"
+
+    if !season_id.blank?
+      join_string = join_string + " AND registrations.season_id = " + season_id
+    end
     
     if !first_name.blank?
       join_string = join_string + " AND participants.first_name like '%" + first_name + "%'"

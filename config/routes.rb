@@ -25,6 +25,7 @@ RegistrationApp::Application.routes.draw do
   match '/editregistration', :to => 'registrations#edit'
   match '/deleteregistration', :to => 'registrations#destroy'
   match '/findregistration', :to => 'registrations#find'
+  match '/copyregistration', :to => 'registrations#copy'
   match '/excelexport', :to => 'registrations#export'
   match '/excelemails', :to => 'registrations#export_emails'
   match '/excelparentemails', :to => 'registrations#export_parent_emails'
@@ -38,6 +39,7 @@ RegistrationApp::Application.routes.draw do
   get "registrations/destroy"
   get "registrations/create"
   get "registrations/find"
+  get "registrations/copy"
   
   get "events/show"
   get "events/index"

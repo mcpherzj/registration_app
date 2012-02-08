@@ -102,13 +102,19 @@ class RegistrationsController < ApplicationController
       :filename => "#{file}"})
   	
   end
+
+  def copy
+  	@registration = copy_registration(params[:id])
+  	
+  	render :action => "new"
+  end
     
   def new
   	@title = "New Registration"
   	
-  	if (!params[:id].nil?)
-  	  @registration = copy_registration(params[:id])
-	  end
+  	#if (!params[:id].nil?)
+  	#  @registration = copy_registration(params[:id])
+	  #end
 	  
 	  if (@registration.nil?)
   	
@@ -187,7 +193,11 @@ class RegistrationsController < ApplicationController
   def index
   	@title = "Registrations Listing"
   	#@registrations = Registration.search(params[:search])
-  	@registrations = Registration.all
+  	if (params[:season_id].nil?)
+  	  params[:season_id] = Season.where(:active => true).first.id.to_s
+	  end
+  	#@registrations = Registration.all
+  	@registrations = Registration.search(nil, nil, params[:season_id])
 
     if (!@registrations.nil?)
       @registrations.sort!{ |a,b| [a.participant.last_name,a.participant.first_name] <=> [b.participant.last_name,b.participant.first_name] }
@@ -200,7 +210,7 @@ class RegistrationsController < ApplicationController
   	#@criteria.first_name = 
   	#puts params[:search]
 
-  	@registrations = Registration.search(params[:first_name], params[:last_name])
+  	@registrations = Registration.search(params[:first_name], params[:last_name], params[:season_id])
 
     if (!@registrations.nil?)
       @registrations.sort!{ |a,b| [a.participant.last_name,a.participant.first_name] <=> [b.participant.last_name,b.participant.first_name] }

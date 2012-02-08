@@ -20,6 +20,10 @@
 	  <%= label_tag 'email', 'E-mail:', :class => "label-search" %>
       <%= text_field_tag :email, params[:email], :maxlength => "50", :class => "textfield-search" %>
 	</div>
+	<div class="field">
+	  <%= label_tag 'season_id', 'Season:', :class => "label-search" %>
+  	  <%= select_tag :season_id, options_from_collection_for_select(Season.all, :id, :name, params[:season_id].to_i), :include_blank => true %>
+	</div>
 	<div class="actions">
     	<%= submit_tag "Search", :name => nil, :class => "search-button" %>
 	</div>
@@ -50,7 +54,7 @@
 	<td><%= link_to 'Edit', editregistration_path(:id => reg.id) %></td>
     <td><%= link_to 'Show', registration_path(reg) %></td>
     <td><%= link_to 'Delete', deleteregistration_path(:id => reg), :confirm => 'Are you sure you want to delete this registration?' %></td>
-	<td><%= link_to 'Copy', newregistration_path(:id => reg.id) %></td>
+	<td><%= link_to 'Copy', copyregistration_path(:id => reg.id) %></td>
   </tr>
 <% end %>
 </table>

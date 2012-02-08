@@ -7,10 +7,22 @@
 <p id="notice"><%= notice %></p>
 <% end %>
 
+<% form_tag @search, :method => 'get' do %>
+    <p>
+	<div class="field">
+	  <%= label_tag 'season_id', 'Season:' %>
+  	  <%= select_tag :season_id, options_from_collection_for_select(Season.all, :id, :name, params[:season_id].to_i) %>
+  	  <%= submit_tag "Go", :name => nil, :class => "search-button" %>
+	</div>
+    </p>
+  <% end %>
+
+
 <table id="registration_table">
   <tr>
     <th>Last Name</th>
     <th>First Name</th>
+    <th>Season</th>
     <th>Created</th>
     <th>Updated</th>
     <th></th>
@@ -22,6 +34,7 @@
   <tr>
     <td><%= reg.participant.last_name.truncate(30) %></td>
     <td><%= reg.participant.first_name.truncate(30) %></td>
+    <td><%= reg.season.name %></td>
     <td><%= reg.created_at.getlocal.strftime '%m-%d-%Y %I:%M %p' %></td>
     <td><%= reg.maximum_updated_at.getlocal.strftime '%m-%d-%Y %I:%M %p' %></td>
 	<td><%= link_to 'Edit', editregistration_path(:id => reg.id) %></td>
