@@ -44,10 +44,17 @@ class Registration < ActiveRecord::Base
   	  	
   end
   
-  def self.search(first_name, last_name, season_id)
-    return [] if first_name.blank? and last_name.blank? and season_id.blank? 
+  def self.search(first_name, last_name, season_id, email)
+    return [] if first_name.blank? and last_name.blank? and season_id.blank? and email.blank?
     
     join_string = "INNER JOIN participants ON participants.id = registrations.participant_id"
+
+    if !email.blank?
+      join_string = join_string + " AND ( participants.email = '" + email + "'" + \
+        " OR participants.preferred_parent_email = '" + email + "'" + \
+        " OR participants.fathers_email = '" + email + "'" + \
+        " OR participants.mothers_email = '" + email + "' )"
+    end
 
     if !season_id.blank?
       join_string = join_string + " AND registrations.season_id = " + season_id

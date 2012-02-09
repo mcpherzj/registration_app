@@ -197,7 +197,7 @@ class RegistrationsController < ApplicationController
   	  params[:season_id] = Season.where(:active => true).first.id.to_s
 	  end
   	#@registrations = Registration.all
-  	@registrations = Registration.search(nil, nil, params[:season_id])
+  	@registrations = Registration.search(nil, nil, params[:season_id], nil)
 
     if (!@registrations.nil?)
       @registrations.sort!{ |a,b| [a.participant.last_name,a.participant.first_name] <=> [b.participant.last_name,b.participant.first_name] }
@@ -210,7 +210,7 @@ class RegistrationsController < ApplicationController
   	#@criteria.first_name = 
   	#puts params[:search]
 
-  	@registrations = Registration.search(params[:first_name], params[:last_name], params[:season_id])
+  	@registrations = Registration.search(params[:first_name], params[:last_name], params[:season_id], params[:email])
 
     if (!@registrations.nil?)
       @registrations.sort!{ |a,b| [a.participant.last_name,a.participant.first_name] <=> [b.participant.last_name,b.participant.first_name] }
