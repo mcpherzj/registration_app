@@ -18,7 +18,7 @@
   <br/>
   <p>Required fields are mark with an asterisk(*)</p>
   <div class="field">
-    <%= f.label :season_id, 'Season' %>
+    <%= f.label :season_id, 'Season', :class => "label-registration" %>
 	<% if (@registration.id.nil?) %>
   	<%= f.collection_select(:season_id, Season.where(:active => true), :id, :name) %>
 	<% else %>
@@ -26,104 +26,108 @@
 	<% end %>
   </div>
   <div class="field">
-    <%= f.label :in_track_central, 'In Track Central' %>
+    <%= f.label :in_track_central, 'In Track Central', :class => "label-registration" %>
   	<%= f.collection_select(:in_track_central, InTrackCentral.all, :id, :name) %>
   </div>
 
 	<h2>ATHLETE:</h2>
 	<%= f.fields_for :participant do |part_form| %>
 	    <div class="field">
-	      <%= part_form.label :first_name, 'First name*' %>
+	      <%= part_form.label :first_name, 'First name*', :class => "label-registration" %>
 	      <%= part_form.text_field :first_name, :maxlength => "50" %>
 	    </div>
 	    <div class="field">
-	      <%= part_form.label :last_name, 'Last name*' %>
+	      <%= part_form.label :last_name, 'Last name*', :class => "label-registration" %>
 	      <%= part_form.text_field :last_name, :maxlength => "50" %>
 	    </div>
 	    <div class="field">
-          <%= part_form.label :gender_id, 'Gender*' %>
+          <%= part_form.label :gender_id, 'Gender*', :class => "label-registration" %>
   	      <%= part_form.collection_select(:gender_id, Gender.all, :id, :name, { :prompt => '-- Select Gender --'}) %> 
 	    </div>
 	    <div class="field">
-	      <%= part_form.label :date_of_birth, 'Date of birth*' %>
+	      <%= part_form.label :date_of_birth, 'Date of birth*', :class => "label-registration" %>
 	      <%= part_form.date_select :date_of_birth, :start_year => Time.now.year - 21, :end_year => Time.now.year - 4, :order => [:month, :day, :year], :prompt => { :day => '-- Select day --', :month => '-- Select month --', :year => '-- Select year --' },  :default => { :day => '-- Select day --', :month => '-- Select month --', :year => '-- Select year --' } %>
 	    </div>
 	    <div class="field">
-	      <%= part_form.label :street_address %>
+	      <%= part_form.label :street_address, :class => "label-registration" %>
 	      <%= part_form.text_field :street_address, :maxlength => "75"  %>
 	    </div>
 	    <div class="field">
-	      <%= part_form.label :city %>
+	      <%= part_form.label :city, :class => "label-registration" %>
 	      <%= part_form.text_field :city, :maxlength => "50" %>
-	      <%= part_form.label :state %>
+	    </div>
+	    <div class="field">
+	      <%= part_form.label :state, :class => "label-registration" %>
 	      <%= part_form.text_field :state, :maxlength => "2" %>
 	      <%= part_form.label :zip %>
 	      <%= part_form.text_field :zip, :maxlength => "10" %>
 	    </div>
 	    <div class="field">
-	      <%= part_form.label :subdivision %>
+	      <%= part_form.label :subdivision, :class => "label-registration" %>
 	      <%= part_form.text_field :subdivision, :maxlength => "50" %>
 	    </div>
 	    <div class="field">
-	      <%= part_form.label :school %>
+	      <%= part_form.label :school, :class => "label-registration" %>
 	      <%= part_form.text_field :school, :maxlength => "50" %>
 	      <%= part_form.label :grade %>
 	      <%= part_form.collection_select :grade, Grade.all, :name, :name, { :include_blank => true } %>
 	    </div>
 	    <div class="field">
-	      <%= part_form.label :home_phone, 'Home phone*' %>
+	      <%= part_form.label :home_phone, 'Home phone*', :class => "label-registration" %>
 	      <%= part_form.telephone_field :home_phone, :maxlength => "25" %>
 	    </div>
 	    <div class="field">
-	      <%= part_form.label :cell_phone, "Athlete's Cell Phone" %>
+	      <%= part_form.label :cell_phone, "Athlete's Cell Phone", :class => "label-registration" %>
 	      <%= part_form.telephone_field :cell_phone, :maxlength => "25" %>
-	      <%= part_form.label :email %>
+	    </div>
+	    <div class="field">
+	      <%= part_form.label :email, :class => "label-registration" %>
 	      <%= part_form.text_field :email, :maxlength => "50" %>
 	    </div>
 	    <div class="field">
-	      <%= part_form.label :preferred_parent_email %>
+	      <%= part_form.label :preferred_parent_email, :class => "label-registration" %>
 	      <%= part_form.text_field :preferred_parent_email, :maxlength => "50" %>
 	    </div>
 <br/>
 	<h2>PARENTS:</h2>
 	    <div class="field">
-	      <%= part_form.label :fathers_name %>
+	      <%= part_form.label :fathers_name, :class => "label-registration" %>
 	      <%= part_form.text_field :fathers_name, :maxlength => "60" %>
 	    </div>
 	    <div class="field">
-	      <%= part_form.label :fathers_work_phone %>
+	      <%= part_form.label :fathers_work_phone, :class => "label-registration" %>
 	      <%= part_form.telephone_field :fathers_work_phone, :maxlength => "25" %>
 	    </div>
 	    <div class="field">
-	      <%= part_form.label :fathers_cell_phone %>
+	      <%= part_form.label :fathers_cell_phone, :class => "label-registration" %>
 	      <%= part_form.telephone_field :fathers_cell_phone, :maxlength => "25" %>
 	    </div>
 	    <div class="field">
-	      <%= part_form.label :fathers_email %>
+	      <%= part_form.label :fathers_email, :class => "label-registration" %>
 	      <%= part_form.text_field :fathers_email, :maxlength => "50" %>
 	    </div>
 	    <div class="field">
-	      <%= part_form.label :mothers_name %>
+	      <%= part_form.label :mothers_name, :class => "label-registration" %>
 	      <%= part_form.text_field :mothers_name, :maxlength => "60" %>
 	    </div>
 	    <div class="field">
-	      <%= part_form.label :mothers_work_phone %>
+	      <%= part_form.label :mothers_work_phone, :class => "label-registration" %>
 	      <%= part_form.telephone_field :mothers_work_phone, :maxlength => "25" %>
 	    </div>
 	    <div class="field">
-	      <%= part_form.label :mothers_cell_phone %>
+	      <%= part_form.label :mothers_cell_phone, :class => "label-registration" %>
 	      <%= part_form.telephone_field :mothers_cell_phone, :maxlength => "25" %>
 	    </div>
 	    <div class="field">
-	      <%= part_form.label :mothers_email %>
+	      <%= part_form.label :mothers_email, :class => "label-registration" %>
 	      <%= part_form.text_field :mothers_email, :maxlength => "50" %>
 	    </div>
 	    <div class="field">
-	      <%= part_form.label :nearest_relative_name %>
+	      <%= part_form.label :nearest_relative_name, :class => "label-registration" %>
 	      <%= part_form.text_field :nearest_relative_name, :maxlength => "60" %>
 	    </div>
 	    <div class="field">
-	      <%= part_form.label :nearest_relative_phone %>
+	      <%= part_form.label :nearest_relative_phone, :class => "label-registration" %>
 	      <%= part_form.telephone_field :nearest_relative_phone, :maxlength => "25" %>
 	    </div>
 	    <div class="field">
@@ -133,29 +137,29 @@
 
   <h2>UNIFORMS:</h2>
   <div class="field">
-    <%= f.label :child_uniform_size_id, 'Child Uniform Size' %>
+    <%= f.label :child_uniform_size_id, 'Child Uniform Size', :class => "label-registration" %>
   	<%= f.collection_select(:child_uniform_size_id, UniformSize.child_uniform_sizes, :id, :name, { :prompt => '-- Select Size --'}) %> For Sub-Bantums and Bantums only
   </div>
   <div class="field">
-    <%= f.label :uniform_size_id, 'Uniform Size' %>
+    <%= f.label :uniform_size_id, 'Uniform Size', :class => "label-registration" %>
   	<%= f.collection_select(:uniform_size_id, UniformSize.adult_uniform_sizes, :id, :name, { :prompt => '-- Select Size --'}) %> For Midgets and Up only
   </div>
   <div class="field">
-    <%= f.label :shirt_size_id, 'Shirt Size' %>
+    <%= f.label :shirt_size_id, 'Shirt Size', :class => "label-registration" %>
   	<%= f.collection_select(:shirt_size_id, ShirtSize.all, :id, :name, { :prompt => '-- Select Size --'}) %> 
   </div>
 <br/>
   <h2>MEDICAL RELEASE INFORMATION:</h2>
 	    <div class="field">
-	      <%= part_form.label :parent_legal_guardian, 'Parent or Legal Guardian' %>
+	      <%= part_form.label :parent_legal_guardian, 'Parent or Legal Guardian', :class => "label-registration" %>
 	      <%= part_form.text_field :parent_legal_guardian, :maxlength => "60" %>
 	    </div>
 	    <div class="field">
-	      <%= part_form.label :emergency_contact_name, 'Alternate Emergency Contact Name' %>
+	      <%= part_form.label :emergency_contact_name, 'Alt. Emergency Contact Name', :class => "label-registration" %>
 	      <%= part_form.text_field :emergency_contact_name, :maxlength => "60" %>
 	    </div>
 	    <div class="field">
-	      <%= part_form.label :emergency_contact_phone, 'Alternate Emergency Contact Phone' %>
+	      <%= part_form.label :emergency_contact_phone, 'Alt. Emergency Contact Phone', :class => "label-registration" %>
 	      <%= part_form.telephone_field :emergency_contact_phone, :maxlength => "25" %>
 	    </div>
 <br/>
@@ -169,25 +173,25 @@
 	    </div>
 <p><b>Medical Insurance:</b></p>
 	    <div class="field">
-	      <%= part_form.label :medical_insurance_company %>
+	      <%= part_form.label :medical_insurance_company, :class => "label-registration" %>
 	      <%= part_form.text_field :medical_insurance_company, :maxlength => "60" %>
 	    </div>
 	    <div class="field">
-	      <%= part_form.label :name_of_insured %>
+	      <%= part_form.label :name_of_insured, :class => "label-registration" %>
 	      <%= part_form.text_field :name_of_insured, :maxlength => "60" %>
 	    </div>
 	    <div class="field">
-	      <%= part_form.label :policy_or_group_number %>
+	      <%= part_form.label :policy_or_group_number, :class => "label-registration" %>
 	      <%= part_form.text_field :policy_or_group_number, :maxlength => "25" %>
 	    </div>
 	    <div class="field">
-	      <%= part_form.label :medical_insurance_id_number, "ID Number" %>
+	      <%= part_form.label :medical_insurance_id_number, "ID Number", :class => "label-registration" %>
 	      <%= part_form.text_field :medical_insurance_id_number, :maxlength => "25" %>
 	    </div>
 
   <h2>EVENT SELECTION:</h2>
   <div class="field">
-    <%= f.label :event_discipline_id, 'Primary Event' %>
+    <%= f.label :event_discipline_id, 'Primary Event', :class => "label-registration" %>
   	<%= f.collection_select(:event_discipline_id, EventDiscipline.all, :id, :name, { :prompt => '-- Select Event --'}) %> 
   </div>
   <% loop = 0 %>
@@ -227,7 +231,7 @@ Please select the area(s) in which you are willing to help out:
   <h2>Fundraising:</h2>
 Please identify whether you plan to purchase the fundraising buyout:
   <div class="field">
-    <%= f.label :fundraising_buy_out, 'Buy Out' %>
+    <%= f.label :fundraising_buy_out, 'Buy Out', :class => "label-registration" %>
   	<%= f.collection_select(:fundraising_buy_out, FundraisingBuyOut.all, :id, :name, { :prompt => '-- Select Option --'}) %>
   </div>
     
