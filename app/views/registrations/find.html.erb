@@ -6,7 +6,7 @@
 <p id="notice"><%= notice %></p>
 <% end %>
 
-<% form_tag @search, :method => 'get' do %>
+<%= form_tag @search, :method => 'get' do %>
     <p>
 	<div class="field">
 	  <%= label_tag 'first_name', 'First Name:', :class => "label-search" %>
@@ -31,6 +31,20 @@
   <% end %>
 
 <% if (@registrations.count > 0) %>
+<ul>
+	<li>
+<%= link_to 'Export List', excelexport_path(:first_name => params[:first_name], :last_name => params[:last_name], :email => params[:email], :season_id => params[:season_id]) %>
+</li>
+<li>
+<%= link_to "Export Preferred Emails", excelemails_path(:first_name => params[:first_name], :last_name => params[:last_name], :email => params[:email], :season_id => params[:season_id]) %>
+</li>
+<li>
+<%= link_to "Export Parents Emails", excelparentemails_path(:first_name => params[:first_name], :last_name => params[:last_name], :email => params[:email], :season_id => params[:season_id]) %>
+</li>
+<li>
+<%= link_to "Export Athletes Emails", excelathleteemails_path(:first_name => params[:first_name], :last_name => params[:last_name], :email => params[:email], :season_id => params[:season_id]) %>
+</li>
+</ul>
 <table id="registration_table">
   <tr>
     <th>Last Name</th>
@@ -42,7 +56,6 @@
     <th></th>
     <th></th>
   </tr>
-<% end %>
 
 <% @registrations.each do |reg| %>
   <tr>
@@ -58,8 +71,5 @@
   </tr>
 <% end %>
 </table>
-
-<br />
-
-<%= link_to 'New Registration', newregistration_path %>
+<% end %>
 </subsection>

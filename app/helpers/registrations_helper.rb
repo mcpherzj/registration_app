@@ -41,8 +41,9 @@ module RegistrationsHelper
     
     worksheet = workbook.create_worksheet :name => "Registrations"
   
-    registrations = Registration.all
-    if (registrations.count > 0)
+    #registrations = Registration.all
+    registrations = Registration.search(params[:first_name], params[:last_name], params[:season_id], params[:email])
+  	if (registrations.count > 0)
       participant_order = [ "id", 
                             "first_name", 
                             "last_name", 
@@ -209,19 +210,20 @@ module RegistrationsHelper
     #worksheet.row(rownum).push "email"
     #worksheet.row(rownum).default_format = heading
     
-    seasonTypes = SeasonType.where(:name => "Track & Field")
+    #seasonTypes = SeasonType.where(:name => "Track & Field")
 
-    if (seasonTypes == 0)
-      return workbook
-    end
+    #if (seasonTypes == 0)
+    #  return workbook
+    #end
 
-    seasons = Season.where(:season_type_id => seasonTypes[0].id, :active => true)
+    #seasons = Season.where(:season_type_id => seasonTypes[0].id, :active => true)
 
-    if (seasons.count == 0)
-      return workbook
-    end
+    #if (seasons.count == 0)
+    #  return workbook
+    #end
 
-    regs = Registration.where(:season_id => seasons[0].id)
+    #regs = Registration.where(:season_id => seasons[0].id)
+    regs = Registration.search(params[:first_name], params[:last_name], params[:season_id], params[:email])
     if (regs.count == 0)
       return workbook
     end
@@ -260,19 +262,20 @@ module RegistrationsHelper
     
     rownum = 0
     
-    seasonTypes = SeasonType.where(:name => "Track & Field")
+    #seasonTypes = SeasonType.where(:name => "Track & Field")
 
-    if (seasonTypes == 0)
-      return workbook
-    end
+    #if (seasonTypes == 0)
+    #  return workbook
+    #end
 
-    seasons = Season.where(:season_type_id => seasonTypes[0].id, :active => true)
+    #seasons = Season.where(:season_type_id => seasonTypes[0].id, :active => true)
 
-    if (seasons.count == 0)
-      return workbook
-    end
+    #if (seasons.count == 0)
+    #  return workbook
+    #end
 
-    regs = Registration.where(:season_id => seasons[0].id)
+    #regs = Registration.where(:season_id => seasons[0].id)
+    regs = Registration.search(params[:first_name], params[:last_name], params[:season_id], params[:email])
     if (regs.count == 0)
       return workbook
     end
@@ -315,19 +318,20 @@ module RegistrationsHelper
     
     rownum = 0
     
-    seasonTypes = SeasonType.where(:name => "Track & Field")
+    #seasonTypes = SeasonType.where(:name => "Track & Field")
 
-    if (seasonTypes == 0)
-      return workbook
-    end
+    #if (seasonTypes == 0)
+    #  return workbook
+    #end
 
-    seasons = Season.where(:season_type_id => seasonTypes[0].id, :active => true)
+    #seasons = Season.where(:season_type_id => seasonTypes[0].id, :active => true)
 
-    if (seasons.count == 0)
-      return workbook
-    end
+    #if (seasons.count == 0)
+    #  return workbook
+    #end
 
-    regs = Registration.where(:season_id => seasons[0].id)
+    #regs = Registration.where(:season_id => seasons[0].id)
+    regs = Registration.search(params[:first_name], params[:last_name], params[:season_id], params[:email])
     if (regs.count == 0)
       return workbook
     end

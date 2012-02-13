@@ -120,7 +120,7 @@ class RegistrationsController < ApplicationController
   	
   	  @registration = Registration.new
   	  @registration.participant = Participant.new
-  	  @registration.participant.build;
+  	  #@registration.participant.build;
   	
   	  initialize_event_selections
   	  initialize_volunteer_selections
