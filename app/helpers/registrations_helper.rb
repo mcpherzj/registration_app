@@ -367,8 +367,8 @@ module RegistrationsHelper
   	reg_copy = nil;
   	
   	if (!reg.nil?)
-  	  reg_copy = reg.clone
-  	  reg_copy.participant = reg.participant.clone
+  	  reg_copy = reg.dup
+  	  reg_copy.participant = reg.participant.dup
 
   	  copy_event_selections(reg, reg_copy)
   	  copy_volunteer_selections(reg, reg_copy)

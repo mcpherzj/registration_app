@@ -105,6 +105,7 @@ class RegistrationsController < ApplicationController
 
   def copy
   	@registration = copy_registration(params[:id])
+  	#@registration = Registration.find(params[:id])
   	
   	render :action => "new"
   end
