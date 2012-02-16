@@ -10,11 +10,11 @@
 <br/>
 <%= form_for(@registration) do |f| %>
   <div class="field">
-    <%= f.label :season_id, 'Season' %>
+    <%= f.label :season_id, 'Season', :class => "label-registration" %>
   	<%= @registration.season.name %> 
   </div>
   <div class="field">
-    <%= f.label :in_track_central, 'In Track Central' %>
+    <%= f.label :in_track_central, 'In Track Central', :class => "label-registration" %>
     <% if (!@registration.in_track_central.nil?)%>
       <% if (@registration.in_track_central == true)%>
       	Yes
@@ -27,121 +27,125 @@
 	<h2>ATHLETE:</h2>
 	<%= f.fields_for :participant do |part_form| %>
 	    <div class="field">
-	      <%= part_form.label :first_name %>
+	      <%= part_form.label :first_name, :class => "label-registration" %>
 	      <%= part_form.text_field :first_name, :maxlength => "50", :disabled => "disabled", :style => "border: none" %>
 	    </div>
 	    <div class="field">
-	      <%= part_form.label :last_name %>
+	      <%= part_form.label :last_name, :class => "label-registration" %>
 	      <%= part_form.text_field :last_name, :maxlength => "50", :disabled => "disabled", :style => "border: none" %>
 	    </div>
 	    <div class="field">
-          <%= part_form.label :gender_id, 'Gender' %>
+          <%= part_form.label :gender_id, 'Gender', :class => "label-registration" %>
           <% if !@registration.participant.gender.nil? %>
   	        <%= @registration.participant.gender.name %>
   	      <% end %>
 	    </div>
 	    <div class="field">
-	      <%= part_form.label :date_of_birth %>
+	      <%= part_form.label :date_of_birth, :class => "label-registration" %>
 	      <%= @registration.participant.date_of_birth.strftime '%m-%d-%Y' %>
 	    </div>
 	    <div class="field">
-	      <%= part_form.label :street_address %>
+	      <%= part_form.label :street_address, :class => "label-registration" %>
 	      <%= part_form.text_field :street_address, :maxlength => "75", :disabled => "disabled", :style => "border: none"  %>
 	    </div>
 	    <div class="field">
-	      <%= part_form.label :city %>
+	      <%= part_form.label :city, :class => "label-registration" %>
 	      <%= part_form.text_field :city, :maxlength => "50", :disabled => "disabled", :style => "border: none" %>
-	      <%= part_form.label :state %>
+	    </div>
+	    <div class="field">
+	      <%= part_form.label :state, :class => "label-registration" %>
 	      <%= part_form.text_field :state, :maxlength => "2", :disabled => "disabled", :style => "border: none" %>
 	      <%= part_form.label :zip %>
 	      <%= part_form.text_field :zip, :maxlength => "10", :disabled => "disabled", :style => "border: none" %>
 	    </div>
 	    <div class="field">
-	      <%= part_form.label :subdivision %>
+	      <%= part_form.label :subdivision, :class => "label-registration" %>
 	      <%= part_form.text_field :subdivision, :maxlength => "50", :disabled => "disabled", :style => "border: none" %>
 	    </div>
 	    <div class="field">
-	      <%= part_form.label :school %>
+	      <%= part_form.label :school, :class => "label-registration" %>
 	      <%= part_form.text_field :school, :maxlength => "50", :disabled => "disabled", :style => "border: none" %>
 	      <%= part_form.label :grade %>
 	      <%= @registration.participant.grade %>
 	    </div>
 	    <div class="field">
-	      <%= part_form.label :home_phone, 'Home phone*' %>
+	      <%= part_form.label :home_phone, 'Home phone*', :class => "label-registration" %>
 	      <%= part_form.telephone_field :home_phone, :maxlength => "25", :disabled => "disabled", :style => "border: none" %>
 	    </div>
 	    <div class="field">
-	      <%= part_form.label :cell_phone, "Athlete's Cell Phone" %>
+	      <%= part_form.label :cell_phone, "Athlete's Cell Phone", :class => "label-registration" %>
 	      <%= part_form.telephone_field :cell_phone, :maxlength => "25", :disabled => "disabled", :style => "border: none" %>
-	      <%= part_form.label :email %>
+	    </div>
+	    <div class="field">
+	      <%= part_form.label :email, :class => "label-registration" %>
 	      <%= part_form.text_field :email, :maxlength => "50", :disabled => "disabled", :style => "border: none" %>
 	    </div>
 	    <div class="field">
-	      <%= part_form.label :preferred_parent_email, 'Preferred parent email*' %>
+	      <%= part_form.label :preferred_parent_email, 'Preferred parent email*', :class => "label-registration" %>
 	      <%= part_form.text_field :preferred_parent_email, :maxlength => "50", :disabled => "disabled", :style => "border: none" %>
 	    </div>
 <br/>
 	<h2>PARENTS:</h2>
 	    <div class="field">
-	      <%= part_form.label :fathers_name %>
+	      <%= part_form.label :fathers_name, :class => "label-registration" %>
 	      <%= part_form.text_field :fathers_name, :maxlength => "60", :disabled => "disabled", :style => "border: none" %>
 	    </div>
 	    <div class="field">
-	      <%= part_form.label :fathers_work_phone %>
+	      <%= part_form.label :fathers_work_phone, :class => "label-registration" %>
 	      <%= part_form.telephone_field :fathers_work_phone, :maxlength => "25", :disabled => "disabled", :style => "border: none" %>
 	    </div>
 	    <div class="field">
-	      <%= part_form.label :fathers_cell_phone %>
+	      <%= part_form.label :fathers_cell_phone, :class => "label-registration" %>
 	      <%= part_form.telephone_field :fathers_cell_phone, :maxlength => "25", :disabled => "disabled", :style => "border: none" %>
 	    </div>
 	    <div class="field">
-	      <%= part_form.label :fathers_email %>
+	      <%= part_form.label :fathers_email, :class => "label-registration" %>
 	      <%= part_form.text_field :fathers_email, :maxlength => "50", :disabled => "disabled", :style => "border: none" %>
 	    </div>
 	    <div class="field">
-	      <%= part_form.label :mothers_name %>
+	      <%= part_form.label :mothers_name, :class => "label-registration" %>
 	      <%= part_form.text_field :mothers_name, :maxlength => "60", :disabled => "disabled", :style => "border: none" %>
 	    </div>
 	    <div class="field">
-	      <%= part_form.label :mothers_work_phone %>
+	      <%= part_form.label :mothers_work_phone, :class => "label-registration" %>
 	      <%= part_form.telephone_field :mothers_work_phone, :maxlength => "25", :disabled => "disabled", :style => "border: none" %>
 	    </div>
 	    <div class="field">
-	      <%= part_form.label :mothers_cell_phone %>
+	      <%= part_form.label :mothers_cell_phone, :class => "label-registration" %>
 	      <%= part_form.telephone_field :mothers_cell_phone, :maxlength => "25", :disabled => "disabled", :style => "border: none" %>
 	    </div>
 	    <div class="field">
-	      <%= part_form.label :mothers_email %>
+	      <%= part_form.label :mothers_email, :class => "label-registration" %>
 	      <%= part_form.text_field :mothers_email, :maxlength => "50", :disabled => "disabled", :style => "border: none" %>
 	    </div>
 	    <div class="field">
-	      <%= part_form.label :nearest_relative_name %>
+	      <%= part_form.label :nearest_relative_name, :class => "label-registration" %>
 	      <%= part_form.text_field :nearest_relative_name, :maxlength => "60", :disabled => "disabled", :style => "border: none" %>
 	    </div>
 	    <div class="field">
-	      <%= part_form.label :nearest_relative_phone %>
+	      <%= part_form.label :nearest_relative_phone, :class => "label-registration" %>
 	      <%= part_form.telephone_field :nearest_relative_phone, :maxlength => "25", :disabled => "disabled", :style => "border: none" %>
 	    </div>
 	    <div class="field">
-	    <p><%= part_form.label :special_precautions, 'List any precautions:' %></p>
+	    <p><%= part_form.label :special_precautions, 'List any precautions:', :class => "label-registration" %></p>
 	    <p><%= part_form.text_area :special_precautions, :disabled => "disabled" %></p>
 	    </div>
 
   <h2>UNIFORMS:</h2>
   <div class="field">
-    <%= f.label :child_uniform_size_id, 'Child Uniform Size' %>
+    <%= f.label :child_uniform_size_id, 'Child Uniform Size', :class => "label-registration" %>
     <% if !@registration.child_uniform_size_id.nil? %>
   	  <%= UniformSize.find_by_id(@registration.child_uniform_size_id).name %> 
     <% end %>
   </div>
   <div class="field">
-    <%= f.label :uniform_size_id, 'Uniform Size' %>
+    <%= f.label :uniform_size_id, 'Uniform Size', :class => "label-registration" %>
     <% if !@registration.uniform_size_id.nil? %>
   	  <%= @registration.uniform_size.name %> 
     <% end %>
   </div>
   <div class="field">
-    <%= f.label :shirt_size_id, 'T-Shirt Size' %>
+    <%= f.label :shirt_size_id, 'T-Shirt Size', :class => "label-registration" %>
     <% if !@registration.shirt_size_id.nil? %>
     	<%= @registration.shirt_size.name %> 
     <% end %>
@@ -149,15 +153,15 @@
 <br/>
   <h2>MEDICAL RELEASE INFORMATION:</h2>
 	    <div class="field">
-	      <%= part_form.label :parent_legal_guardian, 'Parent or Legal Guardian' %>
+	      <%= part_form.label :parent_legal_guardian, 'Parent or Legal Guardian', :class => "label-registration" %>
 	      <%= part_form.text_field :parent_legal_guardian, :maxlength => "60", :disabled => "disabled", :style => "border: none" %>
 	    </div>
 	    <div class="field">
-	      <%= part_form.label :emergency_contact_name, 'Alternate emergency contact name' %>
+	      <%= part_form.label :emergency_contact_name, 'Alt. emergency contact name', :class => "label-registration" %>
 	      <%= part_form.text_field :emergency_contact_name, :maxlength => "60", :disabled => "disabled", :style => "border: none" %>
 	    </div>
 	    <div class="field">
-	      <%= part_form.label :emergency_contact_phone, 'Alternate emergency contact phone' %>
+	      <%= part_form.label :emergency_contact_phone, 'Alt. emergency contact phone', :class => "label-registration" %>
 	      <%= part_form.telephone_field :emergency_contact_phone, :maxlength => "25", :disabled => "disabled", :style => "border: none" %>
 	    </div>
 <br/>
@@ -171,25 +175,25 @@
 	    </div>
 <p><b>Medical Insurance:</b></p>
 	    <div class="field">
-	      <%= part_form.label :medical_insurance_company %>
+	      <%= part_form.label :medical_insurance_company, :class => "label-registration" %>
 	      <%= part_form.text_field :medical_insurance_company, :maxlength => "60", :disabled => "disabled", :style => "border: none" %>
 	    </div>
 	    <div class="field">
-	      <%= part_form.label :name_of_insured %>
+	      <%= part_form.label :name_of_insured, :class => "label-registration" %>
 	      <%= part_form.text_field :name_of_insured, :maxlength => "60", :disabled => "disabled", :style => "border: none" %>
 	    </div>
 	    <div class="field">
-	      <%= part_form.label :policy_or_group_number %>
+	      <%= part_form.label :policy_or_group_number, :class => "label-registration" %>
 	      <%= part_form.text_field :policy_or_group_number, :maxlength => "25", :disabled => "disabled", :style => "border: none" %>
 	    </div>
 	    <div class="field">
-	      <%= part_form.label :medical_insurance_id_number, "ID Number" %>
+	      <%= part_form.label :medical_insurance_id_number, "ID Number", :class => "label-registration" %>
 	      <%= part_form.text_field :medical_insurance_id_number, :maxlength => "25", :disabled => "disabled", :style => "border: none" %>
 	    </div>
 
   <h2>EVENT SELECTION:</h2>
   <div class="field">
-    <%= f.label :event_discipline_id, 'Primary Event' %>
+    <%= f.label :event_discipline_id, 'Primary Event', :class => "label-registration" %>
     <% if !@registration.event_discipline_id.nil? %>
   	  <%= @registration.event_discipline.name %> 
     <% end %>
@@ -231,7 +235,7 @@ Please select the area(s) in which you are willing to help out:
   <h2>Fundraising:</h2>
 Please identify whether you plan to purchase the fundraising buyout:
   <div class="field">
-    <%= f.label :fundraising_buy_out, 'Buy Out' %>
+    <%= f.label :fundraising_buy_out, 'Buy Out', :class => "label-registration" %>
     <% if (!@registration.fundraising_buy_out.nil?)%>
       <% if (@registration.fundraising_buy_out == true)%>
       	Yes

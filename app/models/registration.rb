@@ -7,12 +7,15 @@ class Registration < ActiveRecord::Base
                   :maximum_updated_at,
                   :fundraising_buy_out,
                   :child_uniform_size_id,
-                  :in_track_central)
+                  :in_track_central,
+                  :participant_attributes,
+                  :volunteer_selections_attributes,
+                  :event_selections_attributes)
   
-  has_many :event_selections  
+  has_many :event_selections
   has_many :events, :through => :event_selections
   
-  has_many :volunteer_selections  
+  has_many :volunteer_selections
   has_many :volunteer_interests, :through => :volunteer_selections
   
   belongs_to :participant

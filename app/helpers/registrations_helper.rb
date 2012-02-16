@@ -377,6 +377,38 @@ module RegistrationsHelper
   	return reg_copy
   	
   end
+
+  def delete_registration(id)
+    
+  	reg = Registration.find(id)
+  	
+  	if (reg.nil?)
+  	  return false
+	  end
+	  
+	  part = reg.participant
+	    
+	  if (part.registrations.count == 1)
+	    if !Participant.delete(part.id)
+	      return false
+      end
+    end
+    
+    reg.event_selections.each do |es|
+      if !EventSelection.delete(es.id)
+        return false
+      end
+    end
+    
+    reg.volunteer_selections.each do |vs|
+      if !VolunteerSelection.delete(vs.id)
+        return false
+      end
+    end
+
+    return Registration.delete(reg.id)
+  	
+  end
   
   def copy_event_selections(registration, reg_copy)
     

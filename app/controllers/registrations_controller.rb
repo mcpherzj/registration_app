@@ -140,12 +140,12 @@ class RegistrationsController < ApplicationController
 
   def update
     @registration = Registration.find(params[:id])
-    @registration.participant.attributes=(
-    		params[:registration][:participant_attributes])
+    #@registration.participant.attributes=(
+    #		params[:registration][:participant_attributes])
     
-    set_date_of_birth(params[:registration][:participant_attributes])
-    update_event_selections(params[:registration][:event_selections_attributes])
-    update_volunteer_selections(params[:registration][:volunteer_selections_attributes])
+    #set_date_of_birth(params[:registration][:participant_attributes])
+    #update_event_selections(params[:registration][:event_selections_attributes])
+    #update_volunteer_selections(params[:registration][:volunteer_selections_attributes])
 
     if @registration.update_attributes(params[:registration])
       redirect_to @registration, :notice => 'Registration was successfully updated.'
@@ -153,26 +153,26 @@ class RegistrationsController < ApplicationController
       sort_event_selections
       sort_volunteer_selections
       render :action => "edit"
-	end
+	  end
 	
   end
 
   def create
   	@registration = Registration.new(params[:registration])
-    @participant = Participant.new(params[:registration][:participant_attributes])
-    @registration.participant = @participant
+    #@participant = Participant.new(params[:registration][:participant_attributes])
+    #@registration.participant = @participant
 
     set_date_of_birth(params[:registration][:participant_attributes])
-    set_event_selections(params[:registration][:event_selections_attributes])
-    set_volunteer_selections(params[:registration][:volunteer_selections_attributes])
+    #set_event_selections(params[:registration][:event_selections_attributes])
+    #set_volunteer_selections(params[:registration][:volunteer_selections_attributes])
     
-	if @registration.save
-	  redirect_to @registration, :notice => 'Registration was successfully created.'
-	else
+	  if @registration.save
+	    redirect_to @registration, :notice => 'Registration was successfully created.'
+	  else
       sort_event_selections
       sort_volunteer_selections
-	  render :action => "new"
-	end
+	    render :action => "new"
+	  end
   end
 
   def show
@@ -220,12 +220,13 @@ class RegistrationsController < ApplicationController
   def destroy
   	@registration = Registration.find(params[:id])
   	
-  	if Registration.delete(@registration.id)
-	  redirect_to registrations_path, :notice => 'Registration was successfully deleted.'
-	else
-	  flash[:error] = 'Registration was NOT successfully deleted!'
-	  redirect_to registrations_path
-	end  	
+  	#if Registration.delete(@registration.id)
+  	if delete_registration(@registration.id)
+	    redirect_to registrations_path, :notice => 'Registration was successfully deleted.'
+	  else
+	    flash[:error] = 'Registration was NOT successfully deleted!'
+	    redirect_to registrations_path
+	  end  	
   end
 
 private
