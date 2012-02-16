@@ -54,6 +54,7 @@
 	<td><%= link_to 'Edit', editregistration_path(:id => reg.id) %></td>
     <td><%= link_to 'Show', registration_path(reg) %></td>
     <td><%= link_to 'Delete', deleteregistration_path(:id => reg), :confirm => 'Are you sure you want to delete this registration?' %></td>
+	<td><%= link_to 'Copy', copyregistration_path(:id => reg.id) %></td>
   </tr>
 <% end %>
 </table>
