@@ -1,12 +1,18 @@
 source 'http://rubygems.org'
 
-#gem 'rails', '3.0.10'
+
 gem 'rails', '3.2.0'
 #gem 'sqlite3-ruby', '1.3.2', :require => 'sqlite3'
-#gem 'sqlite3'
 gem 'rack-ssl-enforcer', :group => :production
 gem 'spreadsheet', '0.6.5.4'
-#gem 'activerecord-sqlite3-adapter'
+
+# for deployment on Heroku
+gem "heroku"
+
+group :production do
+  gem 'pg'
+  gem 'thin'
+end
 
 group :assets do
   gem 'sass-rails', "~> 3.2.3"
@@ -21,7 +27,6 @@ group :development do
 end
 
 group :test do
-  gem 'sqlite3'
   gem 'rspec', '2.5.0'
   gem 'webrat'
   gem 'factory_girl_rails', '1.0'
