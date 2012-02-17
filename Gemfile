@@ -8,10 +8,12 @@ gem 'spreadsheet', '0.6.5.4'
 
 # for deployment on Heroku
 gem "heroku"
+gem 'pg'
+gem 'thin'
 
 group :production do
-  gem 'pg'
-  gem 'thin'
+#  gem 'pg'
+#  gem 'thin'
 end
 
 group :assets do
