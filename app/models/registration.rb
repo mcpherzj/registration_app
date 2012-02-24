@@ -53,10 +53,10 @@ class Registration < ActiveRecord::Base
     join_string = "INNER JOIN participants ON participants.id = registrations.participant_id"
 
     if !email.blank?
-      join_string = join_string + " AND ( participants.email = '" + email + "'" + \
-        " OR participants.preferred_parent_email = '" + email + "'" + \
-        " OR participants.fathers_email = '" + email + "'" + \
-        " OR participants.mothers_email = '" + email + "' )"
+      join_string = join_string + " AND ( LOWER(participants.email) = LOWER('" + email + "')" + \
+        " OR LOWER(participants.preferred_parent_email) = LOWER('" + email + "')" + \
+        " OR LOWER(participants.fathers_email) = LOWER('" + email + "')" + \
+        " OR LOWER(participants.mothers_email) = LOWER('" + email + "') )"
     end
 
     if !season_id.blank?
@@ -64,11 +64,11 @@ class Registration < ActiveRecord::Base
     end
     
     if !first_name.blank?
-      join_string = join_string + " AND participants.first_name like '%" + first_name + "%'"
+      join_string = join_string + " AND LOWER(participants.first_name) like LOWER('%" + first_name + "%')"
     end
     
     if !last_name.blank?
-      join_string = join_string + " AND participants.last_name like '%" + last_name + "%'"
+      join_string = join_string + " AND LOWER(participants.last_name) like LOWER('%" + last_name + "%')"
     end
     return Registration.all(:joins => join_string)
   end

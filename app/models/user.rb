@@ -21,6 +21,14 @@ class User < ActiveRecord::Base
     return user if user.has_password?(submitted_password)
     #return nil	
   end
+  
+  def self.change_password(email, password)
+    user = find_by_email(email)
+    return nil if user.nil?
+    user.salt = make_salt
+    user.encrypted_password = encrypt(password)
+    return user.save
+  end
 
   def self.authenticate_with_salt(id, cookie_salt)
     user = find_by_id(id)

@@ -8,12 +8,14 @@ gem 'spreadsheet', '0.6.5.4'
 
 # for deployment on Heroku
 gem "heroku"
-gem 'pg'
 gem 'thin'
 
 group :production do
+  gem 'pg'
+end
+
+group :staging do
 #  gem 'pg'
-#  gem 'thin'
 end
 
 group :assets do
@@ -25,7 +27,8 @@ end
 group :development do
   gem 'sqlite3'
   gem 'rspec-rails', '2.5.0'
-  gem 'annotate-models', '1.0.4'
+#  gem 'annotate-models', '1.0.4'
+  gem 'annotate', '2.4.0'
 end
 
 group :test do
